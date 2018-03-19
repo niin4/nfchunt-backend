@@ -7,7 +7,7 @@ fs = require('fs'),
 bodyParser = require('body-parser'),
 cors = require('cors');
 
-app.use(bodyParser.json({ type: 'application/json' }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 
 var routes = require('./routes/gamesRoutes'); //importing route
