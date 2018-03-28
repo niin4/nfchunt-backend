@@ -52,7 +52,6 @@ exports.create_game = function(req, res) {
     var sql = 'SELECT * FROM games WHERE g_id = LAST_INSERT_ID()';
     connection.query(sql, function(err, result) {
       if (err) {
-        // We shield our clients from internal errors, but log them
         console.error(err);
         res.statusCode = 500;
         return res.json({
