@@ -6,7 +6,7 @@ const auth_obj = {
     "host"     : process.env.DB_ADDRESS,
     "user"     : process.env.DB_USERNAME,
     "password" : process.env.DB_PASSWORD,
-    "database" : "nhc_hunt"
+    "database" : "nfc_hunt"
   }
 let db = null;
 module.exports = function () {
