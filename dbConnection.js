@@ -6,9 +6,9 @@ const auth_obj = {
     "host"     : "localhost",
     "user"     : process.env.DB_USERNAME,
     "password" : process.env.DB_PASSWORD,
-    "database" : "nhf_hunt"
+    "database" : "nhc_hunt"
   }
-const db = null;
+let db = null;
 module.exports = function () {
     if(!db) {
             db = mysql.createConnection(auth_obj);
