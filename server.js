@@ -11,6 +11,8 @@ app.use(cors());
 const routes = require('./routes/gamesRoutes'); //importing route
 routes(app); //register the route
 
+app.use(express.static('www'));
+
 http.createServer(app).listen(8080, function(){
 	console.log('Server listening on port 8080');
 });
