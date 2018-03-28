@@ -13,6 +13,6 @@ app.use(cors());
 var routes = require('./routes/gamesRoutes'); //importing route
 routes(app); //register the route
 
-http.createServer(app).listen(8099, function(){
-	console.log('Server listening on port 8099');
+http.createServer(app).listen(8080, function(){
+	console.log('Server listening on port 8080');
 });
