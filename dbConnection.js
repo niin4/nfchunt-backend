@@ -3,7 +3,7 @@ const fs = require('fs');
 
 //const auth_obj = JSON.parse(fs.readFileSync(__dirname + '/db_auth.json'));
 const auth_obj = {
-    "host"     : "localhost",
+    "host"     : process.env.DB_ADDRESS,
     "user"     : process.env.DB_USERNAME,
     "password" : process.env.DB_PASSWORD,
     "database" : "nhc_hunt"
