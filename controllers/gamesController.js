@@ -12,7 +12,7 @@ exports.query_games = function(req, res) {
   
     console.log(req.params.user);
     var userId = req.params.user;
-    var sql = `SELECT * FROM games WHERE g_user = ?`;
+    var sql = `SELECT * FROM Games WHERE g_user = ?`;
     connection.query(sql, [ userId ], function(err, results) {
       if (err) {
         console.error(err);
@@ -32,7 +32,7 @@ exports.query_games = function(req, res) {
  
 exports.create_game = function(req, res) {
   const newShortid = shortid.generate();
-  var sql = 'INSERT INTO games (g_user, g_shortcode, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?,?)';
+  var sql = 'INSERT INTO Games (g_user, g_shortcode, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?,?)';
   // Retrieve the data to insert from the POST body
   var data = [
     req.body.user,
@@ -49,7 +49,7 @@ exports.create_game = function(req, res) {
         errors: ['Failed to create new game']
       });
     }
-    var sql = 'SELECT * FROM games WHERE g_id = LAST_INSERT_ID()';
+    var sql = 'SELECT * FROM Games WHERE g_id = LAST_INSERT_ID()';
     connection.query(sql, function(err, result) {
       if (err) {
         console.error(err);
@@ -68,7 +68,7 @@ exports.create_game = function(req, res) {
 
 exports.create_tag = function(req, res) {
   const newShortid = shortid.generate();
-  var sql = 'INSERT INTO games (g_user, g_shortcode, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?,?)';
+  var sql = 'INSERT INTO Games (g_user, g_shortcode, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?,?)';
   // Retrieve the data to insert from the POST body
   var data = [
     req.body.user,
