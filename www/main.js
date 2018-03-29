@@ -1,4 +1,4 @@
-fetch('http://http://nfchunt.jelastic.metropolia.fi/games/Player1')
+fetch('http://nfchunt.jelastic.metropolia.fi/games/Player1')
 .then((res) => { return res.json() })
 .then((data) => {
     console.log(data);
