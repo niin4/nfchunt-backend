@@ -1,4 +1,4 @@
-fetch('games/Player1')
+fetch('games?user=Player1')
 .then((res) => { return res.json() })
 .then((data) => {
     console.log(data);
