@@ -1,7 +1,5 @@
 const mysql = require('mysql');
-const fs = require('fs');
 
-//const auth_obj = JSON.parse(fs.readFileSync(__dirname + '/db_auth.json'));
 const auth_obj = {
     "host"     : process.env.DB_ADDRESS,
     "user"     : process.env.DB_USERNAME,

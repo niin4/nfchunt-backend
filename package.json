@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "supervisor -w server.js server.js"
+    "start": "supervisor -w server.js, controllers/, routes/ server.js",
+    "apidoc": "apidoc -i controllers/ -o www/apidoc/"
   },
   "author": "",
   "license": "ISC",
