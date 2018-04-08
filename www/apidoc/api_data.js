@@ -49,6 +49,18 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "500 Internal server error": [
+          {
+            "group": "500 Internal server error",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Problem fetching data from database.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "controllers/gamesController.js",
     "groupTitle": "Games"
@@ -94,6 +106,26 @@ define({ "api": [
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "404 Document not found": [
+          {
+            "group": "404 Document not found",
+            "optional": false,
+            "field": "GamesNotFound",
+            "description": "<p>Games not found with search parameters.</p>"
+          }
+        ],
+        "500 Internal server error": [
+          {
+            "group": "500 Internal server error",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Problem fetching data from database.</p>"
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "controllers/gamesController.js",
@@ -148,6 +180,26 @@ define({ "api": [
         }
       ]
     },
+    "error": {
+      "fields": {
+        "400 Bad request": [
+          {
+            "group": "400 Bad request",
+            "optional": false,
+            "field": "MissingParameters",
+            "description": "<p>Missing parameter <code>id</code> from request.</p>"
+          }
+        ],
+        "500 Internal server error": [
+          {
+            "group": "500 Internal server error",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Problem fetching data from database.</p>"
+          }
+        ]
+      }
+    },
     "version": "0.0.0",
     "filename": "controllers/gamesController.js",
     "groupTitle": "Games"
@@ -179,6 +231,26 @@ define({ "api": [
           "type": "json"
         }
       ]
+    },
+    "error": {
+      "fields": {
+        "404 Document not found": [
+          {
+            "group": "404 Document not found",
+            "optional": false,
+            "field": "GameNotFound",
+            "description": "<p>Game with <code>id</code> was not found.</p>"
+          }
+        ],
+        "500 Internal server error": [
+          {
+            "group": "500 Internal server error",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Problem fetching data from database.</p>"
+          }
+        ]
+      }
     },
     "version": "0.0.0",
     "filename": "controllers/gamesController.js",

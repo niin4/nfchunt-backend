@@ -21,13 +21,15 @@ var connection = db();
  *    "g_user": "Player1",
  *    "g_shortcode": "rygyB@5cG"
  *  }
+ * @apiError (404 Document not found) GameNotFound Game with <code>id</code> was not found.
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.get_game = (req, res) => {
   var sql = `SELECT * FROM Games WHERE g_id = ?`;
   connection.query(sql, [req.params.id], (err, results) => {
     if (err) {
       res.statusCode = 500;
-      return res.json({ errors: [`Could not retrieve games`] });
+      return res.json({ errors: [`Database error, could not retrieve games`] });
     }
     if (results.length === 0) {
       res.statusCode = 404;
@@ -60,7 +62,7 @@ exports.get_game = (req, res) => {
  *    "g_user": "Player1",
  *    "g_shortcode": "rygyB@5cG"
  *  }
- * 
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.create_game = (req, res) => {
   const newShortid = shortid.generate();
@@ -77,7 +79,7 @@ exports.create_game = (req, res) => {
       console.error(err);
       res.statusCode = 500;
       return res.json({
-        errors: ['Failed to create new game']
+        errors: ['Database error, failed to create new game']
       });
     }
     var sql = 'SELECT * FROM Games WHERE g_id = LAST_INSERT_ID()';
@@ -111,10 +113,12 @@ exports.create_game = (req, res) => {
  *  {
  *    "message": "Game updated successfully"
  *  }
+ * @apiError (400 Bad request) MissingParameters Missing parameter <code>id</code> from request.
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.update_game = (req, res) => {
   if (req.params.id == undefined) {
-    res.statusCode = 500;
+    res.statusCode = 400;
     return res.json({ errors: [`Missing parameters for game id`] });
   }
 
@@ -165,6 +169,8 @@ exports.update_game = (req, res) => {
  *    "g_user": "Player1",
  *    "g_shortcode": "rygyB@5cG"
  *  }
+ * @apiError (404 Document not found) GamesNotFound Games not found with search parameters.
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.query_games = (req, res) => {  
   let conditions = [];
