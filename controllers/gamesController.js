@@ -2,10 +2,8 @@
 const shortid = require('shortid');
 shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
 
-// TODO: Shortcode generation
-
-var db = require('../dbConnection.js');
-var connection = db();
+const db = require('../dbConnection.js');
+const connection = db();
 
 /**
  * @api {get} /games/:id Get game by id
@@ -24,16 +22,14 @@ var connection = db();
  * @apiError (404 Document not found) GameNotFound Game with <code>id</code> was not found.
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
-exports.get_game = (req, res) => {
+exports.get_game = (req, res, next) => {
   var sql = `SELECT * FROM Games WHERE g_id = ?`;
   connection.query(sql, [req.params.id], (err, results) => {
     if (err) {
-      res.statusCode = 500;
-      return res.json({ errors: [`Database error, could not retrieve games`] });
+      return next({error: err, message: 'Error fetching from database'});
     }
     if (results.length === 0) {
-      res.statusCode = 404;
-      return res.json({ errors: [`Games not found`] });
+      return next({status: 404, message: 'No games found'});
     }
     res.statusCode = 200;
     return res.json(results[0]);
@@ -75,22 +71,10 @@ exports.create_game = (req, res) => {
     req.body.completedtext
   ];
   connection.query(sql, data, (err, result) => {
-    if (err) {
-      console.error(err);
-      res.statusCode = 500;
-      return res.json({
-        errors: ['Database error, failed to create new game']
-      });
-    }
-    var sql = 'SELECT * FROM Games WHERE g_id = LAST_INSERT_ID()';
+    if (err) return next({error: err, message: 'Error fetching from database'});
+    const sql = 'SELECT * FROM Games WHERE g_id = LAST_INSERT_ID()';
     connection.query(sql, (err, result) => {
-      if (err) {
-        console.error(err);
-        res.statusCode = 500;
-        return res.json({
-          errors: ['Could not retrieve game after creating']
-        });
-      }
+      if (err) return next({error: err, message: 'Error fetching from database'});
       // The request created a new resource object
       res.statusCode = 201;
       // The result of CREATE should be the same as GET
@@ -113,15 +97,9 @@ exports.create_game = (req, res) => {
  *  {
  *    "message": "Game updated successfully"
  *  }
- * @apiError (400 Bad request) MissingParameters Missing parameter <code>id</code> from request.
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.update_game = (req, res) => {
-  if (req.params.id == undefined) {
-    res.statusCode = 400;
-    return res.json({ errors: [`Missing parameters for game id`] });
-  }
-
   let conditions = [];
   let values = [];
   let set = '';
@@ -142,10 +120,7 @@ exports.update_game = (req, res) => {
 
   var sql = `UPDATE Games SET ${set} WHERE g_id = ?`;
   connection.query(sql, [...values, req.params.id], (err, results) => {
-    if (err) {
-      res.statusCode = 500;
-      return res.json({ errors: [`Could not update game`] });
-    }
+    if (err) return next({error: err, message: 'Could not uodate game'});
     res.statusCode = 200;
     return res.json({message: 'Game updated successfully'});
   }); 
@@ -189,42 +164,22 @@ exports.query_games = (req, res) => {
 
   var sql = `SELECT * FROM Games WHERE ${where}`;
   connection.query(sql, values, (err, results) => {
-    if (err) {
-      res.statusCode = 500;
-      return res.json({ errors: [`Could not retrieve games`] });
-    }
+    if (err) return next({error: err, message: 'Error fetching from database'});
     if (results.length === 0) {
-      res.statusCode = 404;
-      return res.json({ errors: [`Games not found`] });
+      return next({status: 404, message: 'No games found'});
     }
     res.statusCode = 200;
     return res.json(results);
   }); 
 };
 
-/*
-//TODO: 
 
-Update game
-
-Delete game
-
-Create tag
-
-Update tag
-
-Create player
-
-Get tags by game
-
-Get players by game, count, leaderboard
-
-Get tags by player in game
-
-Create tag found by player
-
-Delete tag
-
-Empty game -> Remove found tags table by game
-
-*/
+//TODO: Delete also related tags, users and usersFoundTags
+exports.delete_game = (req, res) => {
+  var sql = `DELETE FROM Games WHERE g_id = ?`;
+  connection.query(sql, [req.params.id], (err, results) => {
+    if (err) return next({error: err, message: 'Could not delete game'});
+    res.statusCode = 200;
+    return res.json({message: 'Game deleted successfully'});
+  }); 
+}

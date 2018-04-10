@@ -1,28 +1,24 @@
 'use strict';
+var queryHelper = require('../helpers/queryInfo.js');
+
 module.exports = function(app) {
   var gamesController = require('../controllers/gamesController');
 
   // get games by parameter
   app.route('/games')
-  .get(gamesController.query_games)
+  .get(queryHelper.getClientInfo, gamesController.query_games)
   .post(gamesController.create_game)
 
   app.route('/games/:id')
   .get(gamesController.get_game)
-  .patch(gamesController.update_game);
+  .patch(gamesController.update_game)
+  .delete(gamesController.delete_game);
 
 };
 
 //TODO: 
 
 /*
-Update game
-
-Delete game
-
-Create tag
-
-Update tag
 
 Create user
 
