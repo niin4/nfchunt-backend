@@ -22,18 +22,6 @@ module.exports = function(app) {
 
 Create user
 
-Create player
-
-Get tags by game
-
-Get players by game, count, leaderboard
-
-Get tags by player in game
-
-Create tag found by player
-
-Delete tag
-
 Empty game -> Remove found tags table by game
 
 Authenticate device -> instance id?

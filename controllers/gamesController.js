@@ -17,13 +17,20 @@ const connection = db();
  *  {
  *    "g_id": 2,
  *    "g_user": "Player1",
- *    "g_shortcode": "rygyB@5cG"
+ *    "g_shortcode": "rygyB@5cG",
+ * 	  "players": 2,
+*     "tags": 3
  *  }
  * @apiError (404 Document not found) GameNotFound Game with <code>id</code> was not found.
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.get_game = (req, res, next) => {
-  var sql = `SELECT * FROM Games WHERE g_id = ?`;
+  var sql = `
+  SELECT g_name AS name, g_welcometext AS welcometext, g_completedtext AS completedtext, 
+  (SELECT COUNT(Players.p_id) FROM Games LEFT JOIN Players ON Players.p_game = Games.g_id WHERE Players.p_game = g.g_id) AS players, 
+  (SELECT COUNT(Tags.t_id) FROM Tags INNER JOIN Games ON Tags.t_game = Games.g_id WHERE Tags.t_game = g.g_id) AS tags 
+  FROM Games AS g WHERE g_id = ? GROUP BY g_id
+  `;
   connection.query(sql, [req.params.id], (err, results) => {
     if (err) {
       return next({error: err, message: 'Error fetching from database'});
@@ -147,7 +154,7 @@ exports.update_game = (req, res) => {
  * @apiError (404 Document not found) GamesNotFound Games not found with search parameters.
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
-exports.query_games = (req, res) => {  
+exports.query_games = (req, res, next) => {  
   let conditions = [];
   let values = [];
   let where = '';
@@ -156,9 +163,9 @@ exports.query_games = (req, res) => {
     conditions.push('g_user = ?');
     values.push(req.query.user)
   } 
-  if (req.query.gameid !== undefined) {
+  if (req.query.game !== undefined) {
     conditions.push('g_id = ?');
-    values.push(req.query.gameid)
+    values.push(req.query.game)
   }
   where = conditions.length ? conditions.join(' AND ') : '1';
 
@@ -175,7 +182,7 @@ exports.query_games = (req, res) => {
 
 
 //TODO: Delete also related tags, users and usersFoundTags
-exports.delete_game = (req, res) => {
+exports.delete_game = (req, res, next) => {
   var sql = `DELETE FROM Games WHERE g_id = ?`;
   connection.query(sql, [req.params.id], (err, results) => {
     if (err) return next({error: err, message: 'Could not delete game'});

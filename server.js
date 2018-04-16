@@ -20,10 +20,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Set up routes
-const gameRoutes = require('./routes/gamesRoutes');
-const tagRoutes = require('./routes/tagRoutes');
-gameRoutes(app); 
-tagRoutes(app);
+require('./routes')(app)
 
 app.use(express.static('www'));
 //app.set('view engine', 'ejs');

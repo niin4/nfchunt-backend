@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 node_modules/
-db_auth.json
-=======
-node_modules/
->>>>>>> ac344d7a05599182abec69d8d915285ef7c75a4f
+error.log
