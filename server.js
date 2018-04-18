@@ -35,8 +35,10 @@ server.use(session(sess));
 server.use(passport.initialize());
 server.use(passport.session());
 
+// for jelastic
 server.enable('trust proxy');
 
+// for public files
 server.use('/public', express.static('www'));
 
 // Set up routes
