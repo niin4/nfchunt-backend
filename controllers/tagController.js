@@ -48,7 +48,10 @@ exports.create_tag = (req, res, next) => {
 }
 
 exports.get_tag = (req, res, next) => {
-  var sql = `SELECT * FROM Tags WHERE t_id = ?`;
+  var sql = `SELECT t.t_name AS tag, t.t_id AS tag_id, g.g_name AS game, g.g_id AS game_id 
+  FROM Tags AS t 
+  INNER JOIN Games AS g ON t.t_game = g.g_id
+  WHERE t.t_id = ?`;
   connection.query(sql, [req.params.id], (err, results) => {
     if (err) {
       return next({ error: err, message: 'Error fetching from database' });

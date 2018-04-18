@@ -180,7 +180,6 @@ exports.query_games = (req, res, next) => {
   }); 
 };
 
-
 //TODO: Delete also related tags, users and usersFoundTags
 exports.delete_game = (req, res, next) => {
   var sql = `DELETE FROM Games WHERE g_id = ?`;

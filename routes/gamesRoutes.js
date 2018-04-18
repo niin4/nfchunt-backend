@@ -1,8 +1,8 @@
 'use strict';
-var queryHelper = require('../helpers/queryInfo.js');
+const queryHelper = require('../helpers/queryInfo.js');
 
 module.exports = function(app) {
-  var gamesController = require('../controllers/gamesController');
+  const gamesController = require('../controllers/gamesController');
 
   // get games by parameter
   app.route('/games')

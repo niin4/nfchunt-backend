@@ -28,7 +28,11 @@ exports.query_players = (req, res, next) => {
 };
 
 exports.create_player = (req, res, next) => {
+  if (req.body.name == undefined || req.body.game == undefined) {
+    return next({error: 'Missing parameters' , message: 'Missing parameters'});
+  }
   var sql = 'INSERT INTO Players (p_name, p_game) VALUES (?,?)';
+  console.log(req.body);
   var data = [
     req.body.name,
     req.body.game
@@ -39,6 +43,8 @@ exports.create_player = (req, res, next) => {
     connection.query(sql, (err, result) => {
       if (err) return next({error: err, message: 'Error fetching from database'});
       res.statusCode = 201;
+      res.cookie('userid', result[0].p_id);
+      res.cookie('username', result[0].p_name);
       return res.json(result[0]);
   });
 });
