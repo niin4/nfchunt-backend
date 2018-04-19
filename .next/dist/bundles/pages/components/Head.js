@@ -67,31 +67,23 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 26:
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(27);
+module.exports = __webpack_require__(9);
 
 
 /***/ }),
 
-/***/ 27:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(28)
-
-
-/***/ }),
-
-/***/ 28:
+/***/ 9:
 /***/ (function(module, exports) {
 
-module.exports = require("next/error");
+throw new Error("Module build failed: C:/wamp64/www/nfc_hunt_api/pages/components/Head.js: Duplicate declaration \"Head\"\n\n\u001b[0m \u001b[90m 1 | \u001b[39m\u001b[36mimport\u001b[39m \u001b[33mHead\u001b[39m from \u001b[32m'next/head'\u001b[39m\n \u001b[90m 2 | \u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 3 | \u001b[39m\u001b[36mconst\u001b[39m \u001b[33mHead\u001b[39m \u001b[33m=\u001b[39m () \u001b[33m=>\u001b[39m (\n \u001b[90m   | \u001b[39m      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 4 | \u001b[39m  \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 5 | \u001b[39m    \u001b[33m<\u001b[39m\u001b[33mHead\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 6 | \u001b[39m      \u001b[33m<\u001b[39m\u001b[33mtitle\u001b[39m\u001b[33m>\u001b[39m\u001b[33mNFC\u001b[39m \u001b[33mHunt\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mtitle\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n");
 
 /***/ })
 

@@ -6,7 +6,7 @@ module.exports = function(app) {
 
   // get games by parameter
   app.route('/games')
-  .get(queryHelper.getClientInfo, gamesController.query_games)
+  .get(gamesController.query_games)
   .post(gamesController.create_game)
 
   app.route('/games/:id')

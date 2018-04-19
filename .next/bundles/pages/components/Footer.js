@@ -1,1 +1,1 @@
-module.exports=__NEXT_REGISTER_PAGE("/components/Footer",function(){var o=webpackJsonp([6],{184:function(o,e,n){o.exports=n(32)}},[184]);return{page:o.default}});
+module.exports=__NEXT_REGISTER_PAGE("/components/Footer",function(){var o=webpackJsonp([8],{217:function(o,e,n){o.exports=n(59)}},[217]);return{page:o.default}});

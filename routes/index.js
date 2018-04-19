@@ -5,6 +5,5 @@ module.exports = (app, passport) => {
   require('./tagRoutes')(app);
   require('./playerRoutes')(app);
   require('./loginRoutes')(app, passport);
-  const helper = require('../helpers/userInfoHelper.js');
 
 }

@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -78,6 +78,12 @@ module.exports = require("react");
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/regenerator");
+
+/***/ }),
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -97,7 +103,7 @@ var Footer = function Footer() {
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117,46 +123,51 @@ var Header = function Header() {
 /* harmony default export */ __webpack_exports__["default"] = (Header);
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/regenerator");
-
-/***/ }),
-/* 4 */
+/* 4 */,
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = require("isomorphic-unfetch");
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("es6-promise");
 
 /***/ }),
-/* 6 */,
-/* 7 */,
-/* 8 */
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("https");
+
+/***/ }),
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(9);
+module.exports = __webpack_require__(15);
 
 
 /***/ }),
-/* 9 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Footer__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Footer__ = __webpack_require__(2);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -171,7 +182,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-__webpack_require__(5).polyfill();
+__webpack_require__(6).polyfill();
+var https = __webpack_require__(7);
+var agentOptions = {
+  host: 'localhost',
+  port: '8080',
+  path: '/',
+  rejectUnauthorized: false
+};
+
+var agent = new https.Agent(agentOptions);
 
 
 
@@ -191,22 +211,25 @@ var _class = function (_React$Component) {
               case 0:
                 splitUrl = req.session.redirect.split('/');
                 id = splitUrl[1];
-                _context.next = 4;
-                return __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default()('https://' + req.headers.host + '/tags/' + id);
 
-              case 4:
+                console.log('tag id: ' + id);
+                _context.next = 5;
+                return __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default()('https://' + req.headers.host + '/tags/' + id, { agent: agent });
+
+              case 5:
                 res = _context.sent;
-                _context.next = 7;
+                _context.next = 8;
                 return res.json();
 
-              case 7:
+              case 8:
                 data = _context.sent;
+
+                console.log(data);
                 return _context.abrupt('return', {
-                  tag: data,
-                  redirect: req.session.redirect
+                  tag: data
                 });
 
-              case 9:
+              case 11:
               case 'end':
                 return _context.stop();
             }
@@ -227,27 +250,52 @@ var _class = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
+    _this.postForm = function (path, params, method) {
+      method = method || "post"; // Set method to post by default if not specified.
+      // The rest of this code assumes you are not using a library.
+      // It can be made less wordy if you use one.
+      var form = document.createElement("form");
+      form.setAttribute("method", method);
+      form.setAttribute("action", path);
+
+      for (var key in params) {
+        if (params.hasOwnProperty(key)) {
+          var hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", key);
+          hiddenField.setAttribute("value", params[key]);
+          form.appendChild(hiddenField);
+        }
+      }
+      document.body.appendChild(form);
+      form.submit();
+    };
+
+    _this.componentDidMount = function () {
+      var user = window.localStorage.getItem('NFCHUNT_USER');
+      var game = window.localStorage.getItem('NFCHUNT_GAME');
+      if (user) {
+        console.log('user exists');
+        // check if user is for this game's tag, then log them in
+        console.log(_this.state.tag);
+        console.log(game);
+        if (game == _this.state.tag.game_id) {
+          console.log('match');
+          _this.postForm('/login', { id: user, game: game });
+        } else {
+          console.log('not match, removing local data');
+          //remove from localstorage so we can create new user to this game
+          window.localStorage.removeItem('NFCHUNT_USER', _this.state.user.p_id);
+          window.localStorage.removeItem('NFCHUNT_GAME', _this.state.tag.game_id);
+        }
+      }
+    };
+
     _this.createUser = function (evt) {
       if (!_this.state.user.length) {
         evt.preventDefault();
         console.log('Missing username');
       }
-      /*else {
-        
-        fetch(`http://${window.location.hostname}:8080/signup`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-type': 'application/x-www-form-urlencoded'
-            },
-            body: bodyData
-          })
-          .then((res) => {
-            return res.json()
-          })
-          .then((data) => {
-            console.log(data)
-          });*/
     };
 
     _this.handleChange = function (evt) {
@@ -256,11 +304,11 @@ var _class = function (_React$Component) {
 
     _this.state = {
       tag: props.tag,
-      redirect: props.redirect,
       user: ''
     };
     return _this;
   }
+  // https://stackoverflow.com/a/133997
 
   //TODO: make error
 

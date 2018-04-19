@@ -26,7 +26,7 @@ const connection = db();
  */
 exports.get_game = (req, res, next) => {
   var sql = `
-  SELECT g_name AS name, g_welcometext AS welcometext, g_completedtext AS completedtext, 
+  SELECT g_id AS id, g_name AS name, g_welcometext AS welcometext, g_completedtext AS completedtext, 
   (SELECT COUNT(Players.p_id) FROM Games LEFT JOIN Players ON Players.p_game = Games.g_id WHERE Players.p_game = g.g_id) AS players, 
   (SELECT COUNT(Tags.t_id) FROM Tags INNER JOIN Games ON Tags.t_game = Games.g_id WHERE Tags.t_game = g.g_id) AS tags 
   FROM Games AS g WHERE g_id = ? GROUP BY g_id

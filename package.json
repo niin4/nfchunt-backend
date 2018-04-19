@@ -5,16 +5,15 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -w pages -x \"npm run build\"",
+    "dev": "nodemon -w pages -w scss -e js,scss -x \"npm run build\"",
     "build": "next build",
     "start": "supervisor -w server.js, controllers/, routes/ server.js",
-    "apidoc": "apidoc -i controllers/ -o www/apidoc/",
-    "build-css": "node-sass --include-path scss src/scss/main.scss www/main.css",
-    "watch": "nodemon -e scss -x \"npm run build-css\""
+    "apidoc": "apidoc -i controllers/ -o www/apidoc/"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-sass": "^0.1.2",
     "body-parser": "^1.18.1",
     "cors": "^2.8.4",
     "ejs": "^2.5.8",

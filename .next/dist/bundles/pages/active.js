@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 18);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -78,9 +78,23 @@ module.exports = require("react");
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = require("babel-runtime/regenerator");
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+var Header = function Header() {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'header',
+    null,
+    'NFC Hunt'
+  );
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
 
 /***/ }),
 /* 2 */
@@ -104,32 +118,38 @@ var Footer = function Footer() {
 
 /***/ }),
 /* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-
-
-var Header = function Header() {
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'header',
-    null,
-    'NFC Hunt'
-  );
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Header);
+module.exports = require("babel-runtime/regenerator");
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("isomorphic-unfetch");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("es6-promise");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("https");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__routes_nextRoutes__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__routes_nextRoutes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__routes_nextRoutes__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -138,6 +158,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+
+//import Link from 'next/link';
 
 
 var Menu = function (_React$Component) {
@@ -171,8 +193,8 @@ var Menu = function (_React$Component) {
           'ul',
           null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'a',
-            { href: '/game' },
+            __WEBPACK_IMPORTED_MODULE_1__routes_nextRoutes__["Link"],
+            { prefetch: true, route: '/active' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'li',
               null,
@@ -180,7 +202,7 @@ var Menu = function (_React$Component) {
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'a',
+            __WEBPACK_IMPORTED_MODULE_1__routes_nextRoutes__["Link"],
             { href: '/tag/1' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'li',
@@ -199,13 +221,9 @@ var Menu = function (_React$Component) {
             'Leaderboard'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'a',
-            { href: '/' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'li',
-              null,
-              'Info'
-            )
+            'li',
+            null,
+            'Info'
           )
         )
       );
@@ -218,40 +236,44 @@ var Menu = function (_React$Component) {
 /* harmony default export */ __webpack_exports__["default"] = (Menu);
 
 /***/ }),
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var routes = module.exports = __webpack_require__(9)();
+
+routes.add('active', '/active', '/active').add('tag', '/tag/:id', '/tag');
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("next-routes");
+
+/***/ }),
 /* 10 */,
 /* 11 */,
 /* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(19);
+module.exports = __webpack_require__(14);
 
 
 /***/ }),
-/* 19 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Header__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Footer__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Menu__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scss_styles_scss__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scss_styles_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__scss_styles_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Menu__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -266,57 +288,94 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+__webpack_require__(5).polyfill();
+var https = __webpack_require__(6);
+var agentOptions = {
+  host: 'localhost',
+  port: '8080',
+  path: '/',
+  rejectUnauthorized: false
+};
+
+var agent = new https.Agent(agentOptions);
 
 
 
 
+
+var Game = function Game(props) {
+  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+    'div',
+    null,
+    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+      'h2',
+      null,
+      props.game.name
+    ),
+    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+      'h4',
+      null,
+      'Players: ',
+      props.game.players
+    ),
+    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+      'h4',
+      null,
+      'Tags: ',
+      props.game.tags
+    ),
+    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+      'p',
+      null,
+      props.game.welcometext
+    )
+  );
+};
 
 var _class = function (_React$Component) {
   _inherits(_class, _React$Component);
 
-  function _class() {
-    _classCallCheck(this, _class);
-
-    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
-  }
-
-  _createClass(_class, [{
-    key: 'render',
-    value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-        'div',
-        null,
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Header__["default"], null),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          null,
-          'NFC Hunt is a game about hunting tresures and clues utilizing NFC Tags. Simple to set up and players only need their mobile device to play.'
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Footer__["default"], null)
-      );
-    }
-  }], [{
+  _createClass(_class, null, [{
     key: 'getInitialProps',
     value: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref) {
         var req = _ref.req,
             res = _ref.res;
+        var id, json, data;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                req.session.redirect = 'tag/1';
-                req.session.redirecttype = 'tag';
+                console.log(req.user);
+                id = 1;
 
                 if (!req.user) {
+                  req.session.redirect = 'game';
+                  req.session.redirecttype = 'tag';
                   res.redirect('../createuser');
+                } else {
+                  id = req.user.p_game;
                 }
+
+                _context.next = 5;
+                return __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default()('https://' + req.headers.host + '/games/' + id + '}', { agent: agent });
+
+              case 5:
+                json = _context.sent;
+                _context.next = 8;
+                return json.json();
+
+              case 8:
+                data = _context.sent;
+
+                console.log(data);
+
                 return _context.abrupt('return', {
-                  user: req.user
+                  user: req.user,
+                  game: data
                 });
 
-              case 4:
+              case 11:
               case 'end':
                 return _context.stop();
             }
@@ -332,16 +391,45 @@ var _class = function (_React$Component) {
     }()
   }]);
 
+  function _class(props) {
+    _classCallCheck(this, _class);
+
+    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+
+    _this.componentDidMount = function () {
+      console.log('user:');
+      if (!window.localStorage.getItem('NFCHUNT_USER')) {
+        window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
+        window.localStorage.setItem('NFCHUNT_GAME', _this.state.game.id);
+      }
+    };
+
+    _this.state = {
+      user: props.user,
+      game: props.game
+    };
+    return _this;
+  }
+
+  _createClass(_class, [{
+    key: 'render',
+    value: function render() {
+      var game = this.props.game;
+      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Header__["default"], null),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(Game, { game: game }),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
+      );
+    }
+  }]);
+
   return _class;
 }(__WEBPACK_IMPORTED_MODULE_1_react___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (_class);
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports) {
-
-
 
 /***/ })
 /******/ ]);

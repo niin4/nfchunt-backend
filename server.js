@@ -13,7 +13,7 @@ const express = require('express'),
 
 require('./helpers/passport')(passport);
 
-//configure logging
+// configure logging
 const logger = new winston.Logger({
   level: 'error',
   transports: [
@@ -28,7 +28,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 // session
 const sess = {
   secret: 'keyboard cat',
-  cookie: {}
+  cookie: { maxAge: 60000 }
 }
 
 server.use(session(sess));
@@ -43,15 +43,14 @@ server.use('/public', express.static('www'));
 
 // Set up routes
 require('./routes')(server, passport);
+// routes for server side rendered pages
 const nextRoutes = require('./routes/nextRoutes');
 const handler = nextRoutes.getRequestHandler(app)
 server.use(handler);
 
 // set up error for api calls
 server.use((err, req, res, next) => {
-  if (res.headersSent) {
-    return next(err)
-  }
+  console.log(req);
   console.log(JSON.stringify(err));
   res.status(err.status || 500).json(err);
   logger.log('error', 'Error', err.message)

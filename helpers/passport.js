@@ -7,13 +7,11 @@ const connection = db();
 
 module.exports = (passport) => {
   passport.serializeUser((user, done) => {
-    done(null, user.p_id);
+    done(null, user);
   });
 
   passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
-      done(err, user);
-    });
+    done(null, id);
   });
 
   /**
@@ -30,7 +28,7 @@ module.exports = (passport) => {
       console.log('got body:');
       console.log(userData);
       if (req.body.name == undefined || req.body.game == undefined) {
-        return done({error: 'Missing parameters'});
+        return done({ error: 'Missing parameters' });
       }
       var sql = 'INSERT INTO Players (p_name, p_game) VALUES (?,?)';
       var data = [
@@ -45,29 +43,8 @@ module.exports = (passport) => {
           return done(null, result[0]);
         });
       })
-    /*
-    fetch(`http://${window.location.hostname}:8080/players`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(userData)
-      })
-      .then((res) => {
-        res.json()
-        console.log(res);
-      })
-      .then((data) => {
-        return done(null, data);
-      })
-      .catch((err) => {
-        return done(err)
-      });
-     */ 
     }
   ));
-
 
 
   /**
@@ -75,8 +52,36 @@ module.exports = (passport) => {
    */
   passport.use('local-login', new LocalStrategy({
     // by default, local strategy uses username and password, we will override with email
-    usernameField: 'username',
-    passwordField: 'password',
+    usernameField: 'id',
+    passwordField: 'game',
+    passReqToCallback: true // allows us to pass back the entire request to the callback
+  },
+    (req, username, password, done) => { // callback with email and password from our form
+      const sql = 'SELECT * FROM Players WHERE p_id = ?';
+      connection.query(sql, [username], (err, rows) => {
+        if (err)
+          return done(err);
+        if (!rows.length) {
+          return done({error: 'No user found.'}); // req.flash is the way to set flashdata using connect-flash
+        }
+
+        // if the user is found but the password is wrong
+        if (!(rows[0].p_game == password))
+          return done({error: 'Invalid user game combination'}); // create the loginMessage and save it to session as flashdata
+
+        // all is well, return successful user
+        return done(null, rows[0]);
+
+      });
+    }));
+
+  /**
+   * Login
+   *
+  passport.use('local-login', new LocalStrategy({
+    // by default, local strategy uses username and password, we will override with email
+    usernameField: 'name',
+    passwordField: 'game',
     passReqToCallback: true, // allows us to pass back the entire request to the callback
   },
     (req, username, password, done) => { // callback with email and password from our form
@@ -100,7 +105,7 @@ module.exports = (passport) => {
         return done(null, user);
       });
     }));
-
+*/
 };
 
 

@@ -67,31 +67,41 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 26:
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(27);
+module.exports = __webpack_require__(14);
 
 
 /***/ }),
 
-/***/ 27:
+/***/ 14:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(28)
+var moment = __webpack_require__(15);
 
+exports.getClientInfo = function (req, res, next) {
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress;
+
+  console.log('TIME: ' + moment().format());
+  console.log('PATH: ' + req.route.path);
+  console.log('IP:  ' + ip);
+  console.log('BROWSER: ' + req.headers['user-agent']);
+
+  next();
+};
 
 /***/ }),
 
-/***/ 28:
+/***/ 15:
 /***/ (function(module, exports) {
 
-module.exports = require("next/error");
+module.exports = require("moment");
 
 /***/ })
 
