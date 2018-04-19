@@ -148,7 +148,8 @@ var MyDocument = function (_Document) {
             null,
             "NFC Hunt"
           ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement("link", { rel: "stylesheet", href: "/_next/static/style.css" })
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement("link", { rel: "stylesheet", href: "/_next/static/style.css" }),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement("meta", { name: "viewport", content: "width=device-width, initial-scale=1.0" })
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           "body",

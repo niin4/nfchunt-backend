@@ -83,7 +83,7 @@ export default class extends React.Component {
     }
   }
 
-  handleChange = (evt) => {
+  handleChange = (event) => {
     this.setState({ user: event.target.value });
   }
 
@@ -97,7 +97,7 @@ export default class extends React.Component {
           <h3>Game: {tag.game}</h3>
           <h2>Create user:</h2>
           <form action='/signup' method='POST' onSubmit={this.createUser}>
-            <input type='text' name='name' value={this.state.user} onChange={this.handleChange} />
+            <input type='text' name='name' value={this.state.user} onChange={(evt) => {this.handleChange(evt)}} />
             <input type='hidden' name='game' value={tag.game_id} />
             <button type='submit'>Create user</button>
           </form>

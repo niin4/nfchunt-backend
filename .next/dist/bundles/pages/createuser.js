@@ -298,7 +298,7 @@ var _class = function (_React$Component) {
       }
     };
 
-    _this.handleChange = function (evt) {
+    _this.handleChange = function (event) {
       _this.setState({ user: event.target.value });
     };
 
@@ -316,6 +316,8 @@ var _class = function (_React$Component) {
   _createClass(_class, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var tag = this.state.tag;
 
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -339,7 +341,9 @@ var _class = function (_React$Component) {
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'form',
             { action: '/signup', method: 'POST', onSubmit: this.createUser },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', name: 'name', value: this.state.user, onChange: this.handleChange }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', name: 'name', value: this.state.user, onChange: function onChange(evt) {
+                _this2.handleChange(evt);
+              } }),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'hidden', name: 'game', value: tag.game_id }),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               'button',

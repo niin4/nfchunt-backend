@@ -43,8 +43,6 @@ exports.create_player = (req, res, next) => {
     connection.query(sql, (err, result) => {
       if (err) return next({error: err, message: 'Error fetching from database'});
       res.statusCode = 201;
-      res.cookie('userid', result[0].p_id);
-      res.cookie('username', result[0].p_name);
       return res.json(result[0]);
   });
 });
