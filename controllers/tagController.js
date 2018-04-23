@@ -73,17 +73,25 @@ exports.query_tagsfound = (req, res, next) => {
   let where = '';
 
   if (req.query.game !== undefined) {
-    conditions.push('tf_game = ?');
-    values.push(req.query.game)
+    if (!isNaN(req.query.game)) {
+      conditions.push('tf_game = ?');
+      values.push(req.query.game)
+    } else {
+      return next({status: 400, message: 'Invalid query parameter'})
+    }
   }
   if (req.query.player !== undefined) {
-    conditions.push('tf_player = ?');
-    values.push(req.query.player);
+    if (!isNaN(req.query.player)) {
+      conditions.push('tf_player = ?');
+      values.push(req.query.player);
+    } else {
+      return next({status: 400, message: 'Invalid query parameter'})
+    }
   }
   where = conditions.length ? conditions.join(' AND ') : '1';
 
   const sql = `
-    SELECT t.t_name AS tag, g.g_name AS game, p.p_name AS player, tf.tf_time AS found
+    SELECT t.t_id AS id, t.t_name AS tag, t.t_hint AS hint, g.g_name AS game, p.p_name AS player, tf.tf_time AS found
     FROM Tagsfound AS tf 
     INNER JOIN Games AS g ON tf_game = g_id 
     INNER JOIN Tags AS t ON tf_tag = t_id 
@@ -130,7 +138,7 @@ exports.tag_found = (req, res, next) => {
         if (!results.length) {
           console.log('winner winner chicken dinner');
           res.statusCode = 303;
-          res.json({status: 'All tags found'})
+          res.json({ status: 'All tags found' })
         } else {
           // check f player found current hint
           // update hint
@@ -144,7 +152,7 @@ exports.tag_found = (req, res, next) => {
             connection.query(sql, data, (err, results) => {
               if (err) return next({ error: err, message: 'Error fetching from database' });
               res.statusCode = 201;
-              res.json({ status: 'Hint updated'});
+              res.json({ status: 'Hint updated' });
             });
           } else {
             res.statusCode = 200;

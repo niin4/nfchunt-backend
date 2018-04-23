@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -148,14 +148,15 @@ module.exports = require("https");
 /* 11 */,
 /* 12 */,
 /* 13 */,
-/* 14 */
+/* 14 */,
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(15);
+module.exports = __webpack_require__(16);
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -285,8 +286,8 @@ var _class = function (_React$Component) {
         } else {
           console.log('not match, removing local data');
           //remove from localstorage so we can create new user to this game
-          window.localStorage.removeItem('NFCHUNT_USER', _this.state.user.p_id);
-          window.localStorage.removeItem('NFCHUNT_GAME', _this.state.tag.game_id);
+          window.localStorage.removeItem('NFCHUNT_USER');
+          window.localStorage.removeItem('NFCHUNT_GAME');
         }
       }
     };

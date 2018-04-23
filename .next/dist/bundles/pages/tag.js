@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 28);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -180,9 +180,13 @@ var Menu = function (_React$Component) {
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
-            'Hints'
+            'a',
+            { href: '/hints' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              'Hints'
+            )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'a',
@@ -231,7 +235,58 @@ module.exports = require("es6-promise");
 module.exports = require("https");
 
 /***/ }),
-/* 8 */,
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.getTag = function (id) {
+  return new Promise(function (resolve, reject) {
+    fetch('https://' + window.location.host + '/tags/' + id).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return resolve(data);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+};
+
+exports.getHint = function (playerId) {
+  return new Promise(function (resolve, reject) {
+    fetch('https://' + window.location.host + '/hint/' + playerId).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return resolve(data);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+};
+
+exports.postFoundTag = function (p, t) {
+  return new Promise(function (resolve, reject) {
+    fetch('https://' + window.location.host + '/tagsfound', {
+      body: JSON.stringify({
+        tag: t.tag_id,
+        player: p.p_id,
+        game: t.game_id,
+        current: p.p_current
+      }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (res) {
+      return resolve(res);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+};
+
+/***/ }),
 /* 9 */,
 /* 10 */,
 /* 11 */,
@@ -248,14 +303,17 @@ module.exports = require("https");
 /* 22 */,
 /* 23 */,
 /* 24 */,
-/* 25 */
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(26);
+module.exports = __webpack_require__(29);
 
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -264,14 +322,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_next_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Header__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Menu__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__);
 
 
@@ -368,7 +426,7 @@ var _class = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
     _this.componentDidMount = function () {
-      if (!window.localStorage.getItem('NFCHUNT_USER')) {
+      if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== _this.state.user.p_id) {
         window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
         window.localStorage.setItem('NFCHUNT_GAME', _this.state.user.p_game);
       }
@@ -449,62 +507,10 @@ var _class = function (_React$Component) {
 /* harmony default export */ __webpack_exports__["default"] = (_class);
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, exports) {
 
 module.exports = require("next/router");
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.getTag = function (id) {
-  return new Promise(function (resolve, reject) {
-    fetch('https://' + window.location.host + '/tags/' + id).then(function (res) {
-      return res.json();
-    }).then(function (data) {
-      return resolve(data);
-    }).catch(function (err) {
-      return reject(err);
-    });
-  });
-};
-
-exports.getHint = function (playerId) {
-  return new Promise(function (resolve, reject) {
-    fetch('https://' + window.location.host + '/hint/' + playerId).then(function (res) {
-      return res.json();
-    }).then(function (data) {
-      return resolve(data);
-    }).catch(function (err) {
-      return reject(err);
-    });
-  });
-};
-
-exports.postFoundTag = function (p, t) {
-  return new Promise(function (resolve, reject) {
-    fetch('https://' + window.location.host + '/tagsfound', {
-      body: JSON.stringify({
-        tag: t.tag_id,
-        player: p.p_id,
-        game: t.game_id,
-        current: p.p_current
-      }),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(function (res) {
-      return resolve(res);
-    }).catch(function (err) {
-      return reject(err);
-    });
-  });
-};
 
 /***/ })
 /******/ ]);

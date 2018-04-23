@@ -1,1 +1,1 @@
-module.exports=__NEXT_REGISTER_PAGE("/components/Menu",function(){var e=webpackJsonp([7],{205:function(e,n,o){e.exports=o(37)}},[205]);return{page:e.default}});
+module.exports=__NEXT_REGISTER_PAGE("/components/Menu",function(){var e=webpackJsonp([8],{206:function(e,n,o){e.exports=o(25)}},[206]);return{page:e.default}});

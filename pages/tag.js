@@ -51,7 +51,7 @@ export default class extends React.Component {
   }
 
   componentDidMount = () => {
-    if (!window.localStorage.getItem('NFCHUNT_USER')) {
+    if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== this.state.user.p_id) {
       window.localStorage.setItem('NFCHUNT_USER', this.state.user.p_id);
       window.localStorage.setItem('NFCHUNT_GAME', this.state.user.p_game);
     }

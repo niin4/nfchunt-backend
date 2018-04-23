@@ -70,8 +70,8 @@ export default class extends React.Component {
       } else {
         console.log('not match, removing local data');
         //remove from localstorage so we can create new user to this game
-        window.localStorage.removeItem('NFCHUNT_USER', this.state.user.p_id);
-        window.localStorage.removeItem('NFCHUNT_GAME', this.state.tag.game_id);
+        window.localStorage.removeItem('NFCHUNT_USER');
+        window.localStorage.removeItem('NFCHUNT_GAME');
       }
     }
   }

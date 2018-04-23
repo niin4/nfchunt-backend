@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -217,10 +217,76 @@ var Menu = function (_React$Component) {
 /* harmony default export */ __webpack_exports__["default"] = (Menu);
 
 /***/ }),
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("isomorphic-unfetch");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("es6-promise");
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("https");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.getTag = function (id) {
+  return new Promise(function (resolve, reject) {
+    fetch('https://' + window.location.host + '/tags/' + id).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return resolve(data);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+};
+
+exports.getHint = function (playerId) {
+  return new Promise(function (resolve, reject) {
+    fetch('https://' + window.location.host + '/hint/' + playerId).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return resolve(data);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+};
+
+exports.postFoundTag = function (p, t) {
+  return new Promise(function (resolve, reject) {
+    fetch('https://' + window.location.host + '/tagsfound', {
+      body: JSON.stringify({
+        tag: t.tag_id,
+        player: p.p_id,
+        game: t.game_id,
+        current: p.p_current
+      }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (res) {
+      return resolve(res);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+};
+
+/***/ }),
 /* 9 */,
 /* 10 */,
 /* 11 */,
@@ -231,16 +297,14 @@ var Menu = function (_React$Component) {
 /* 16 */,
 /* 17 */,
 /* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(22);
+module.exports = __webpack_require__(20);
 
 
 /***/ }),
-/* 22 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -249,11 +313,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Header__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Menu__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scss_styles_scss__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scss_styles_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__scss_styles_scss__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_playeractions_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__helpers_playeractions_js__);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -268,6 +334,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+__webpack_require__(6).polyfill();
+var https = __webpack_require__(7);
+var agentOptions = {
+  host: 'localhost',
+  port: '8080',
+  path: '/',
+  rejectUnauthorized: false
+};
+
+var agent = new https.Agent(agentOptions);
+
+
 
 
 
@@ -276,49 +354,46 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var _class = function (_React$Component) {
   _inherits(_class, _React$Component);
 
-  function _class() {
-    _classCallCheck(this, _class);
-
-    return _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).apply(this, arguments));
-  }
-
-  _createClass(_class, [{
-    key: 'render',
-    value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-        'div',
-        null,
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Header__["default"], null),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          null,
-          'NFC Hunt is a game about hunting tresures and clues utilizing NFC Tags. Simple to set up and players only need their mobile device to play.'
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Footer__["default"], null)
-      );
-    }
-  }], [{
+  _createClass(_class, null, [{
     key: 'getInitialProps',
     value: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref) {
         var req = _ref.req,
             res = _ref.res;
+        var id, game, json, data;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                req.session.redirect = 'tag/1';
-                req.session.redirecttype = 'tag';
+                console.log(req.user);
+                id = 1;
+                game = 1;
 
                 if (!req.user) {
+                  req.session.redirect = 'game';
+                  req.session.redirecttype = 'tag';
                   res.redirect('../createuser');
+                } else {
+                  id = req.user.p_id;
+                  game = req.user.p_game;
                 }
+
+                _context.next = 6;
+                return __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default()('https://' + req.headers.host + '/tagsfound?player=' + id + '&game=' + game, { agent: agent });
+
+              case 6:
+                json = _context.sent;
+                _context.next = 9;
+                return json.json();
+
+              case 9:
+                data = _context.sent;
                 return _context.abrupt('return', {
-                  user: req.user
+                  user: req.user,
+                  hints: data
                 });
 
-              case 4:
+              case 11:
               case 'end':
                 return _context.stop();
             }
@@ -334,16 +409,78 @@ var _class = function (_React$Component) {
     }()
   }]);
 
+  function _class(props) {
+    _classCallCheck(this, _class);
+
+    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+
+    _this.componentDidMount = function () {
+      console.log('user:');
+      if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== _this.state.user.p_id) {
+        window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
+        window.localStorage.setItem('NFCHUNT_GAME', _this.state.user.p_game);
+      }
+      __WEBPACK_IMPORTED_MODULE_6__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
+        return _this.setState({ hint: data.hint });
+      });
+    };
+
+    _this.state = {
+      user: props.user
+    };
+    return _this;
+  }
+
+  _createClass(_class, [{
+    key: 'render',
+    value: function render() {
+      var hints = this.props.hints;
+      console.log(hints);
+      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Header__["default"], null),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'h2',
+          null,
+          'Current hint:'
+        ),
+        this.state.hint,
+        !hints.status ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'div',
+          null,
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'h3',
+            null,
+            'Found tags:'
+          ),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'ul',
+            null,
+            hints.map(function (hint) {
+              return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'li',
+                { key: hint.id },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'h4',
+                  null,
+                  hint.tag
+                ),
+                hint.hint
+              );
+            })
+          )
+        ) : null,
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
+      );
+    }
+  }]);
+
   return _class;
 }(__WEBPACK_IMPORTED_MODULE_1_react___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (_class);
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-
 
 /***/ })
 /******/ ]);
