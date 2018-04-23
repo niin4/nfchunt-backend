@@ -16,7 +16,7 @@ exports.query_players = (req, res, next) => {
   }
   where = conditions.length ? conditions.join(' AND ') : '1';
 
-  var sql = `SELECT * FROM Players WHERE ${where}`;
+  const sql = `SELECT * FROM Players WHERE ${where}`;
   connection.query(sql, values, (err, results) => {
     if (err) return next({error: err, message: 'Error fetching from database'});
     if (results.length === 0) {
@@ -31,11 +31,20 @@ exports.create_player = (req, res, next) => {
   if (req.body.name == undefined || req.body.game == undefined) {
     return next({error: 'Missing parameters' , message: 'Missing parameters'});
   }
-  var sql = 'INSERT INTO Players (p_name, p_game) VALUES (?,?)';
+  const sql = `
+  INSERT INTO Players (p_name, p_game, p_current) 
+  VALUES (?,?,
+  (SELECT t_id from Tags 
+    WHERE t_id NOT IN (SELECT tf_tag FROM Tagsfound)
+    AND t_game = ? AND NOT t_id = ?
+    ORDER BY rand() LIMIT 1)
+  )`;
   console.log(req.body);
-  var data = [
+  const data = [
     req.body.name,
-    req.body.game
+    req.body.game,
+    req.body.game,
+    req.body.tag
   ];
   connection.query(sql, data, (err, result) => {
     if (err) return next({error: err, message: 'Error fetching from database'});
@@ -46,4 +55,15 @@ exports.create_player = (req, res, next) => {
       return res.json(result[0]);
   });
 });
+}
+
+exports.get_hint = (req, res, next) => {
+  const sql = `
+  SELECT t.t_hint AS hint FROM Tags AS t INNER JOIN Players AS p ON t.t_id = p.p_current
+  WHERE p.p_id = ? LIMIT 1`;
+  connection.query(sql, [req.params.id], (err, result) => {
+    if (err) return next({error: err, message: 'Error fetching from database'});
+    res.statusCode = 200;
+    return res.json(result[0]);
+  });
 }

@@ -30,10 +30,18 @@ module.exports = (passport) => {
       if (req.body.name == undefined || req.body.game == undefined) {
         return done({ error: 'Missing parameters' });
       }
-      var sql = 'INSERT INTO Players (p_name, p_game) VALUES (?,?)';
-      var data = [
+      const sql = `
+        INSERT INTO Players (p_name, p_game, p_current) 
+        VALUES (?,?,(
+          SELECT t_id from Tags 
+          WHERE t_game = ?
+          ORDER BY rand() LIMIT 1)
+        )`;
+      const data = [
         req.body.name,
-        req.body.game
+        req.body.game,
+        req.body.game,
+        req.body.tag
       ];
       connection.query(sql, data, (err, result) => {
         if (err) return done(err);
@@ -70,6 +78,7 @@ module.exports = (passport) => {
           return done({error: 'Invalid user game combination'}); // create the loginMessage and save it to session as flashdata
 
         // all is well, return successful user
+        console.log(rows[0]);
         return done(null, rows[0]);
 
       });

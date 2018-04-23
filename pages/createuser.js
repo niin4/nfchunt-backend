@@ -99,6 +99,7 @@ export default class extends React.Component {
           <form action='/signup' method='POST' onSubmit={this.createUser}>
             <input type='text' name='name' value={this.state.user} onChange={(evt) => {this.handleChange(evt)}} />
             <input type='hidden' name='game' value={tag.game_id} />
+            <input type='hidden' name='tag' value={tag.tag_id} />
             <button type='submit'>Create user</button>
           </form>
         </div>

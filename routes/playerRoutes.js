@@ -7,4 +7,6 @@ module.exports = (app) => {
   .get(playerController.query_players)
   .post(playerController.create_player);
 
+  app.route('/hint/:id')
+  .get(playerController.get_hint)
 };

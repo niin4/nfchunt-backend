@@ -25,7 +25,7 @@ const connection = db();
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.get_game = (req, res, next) => {
-  var sql = `
+  const sql = `
   SELECT g_id AS id, g_name AS name, g_welcometext AS welcometext, g_completedtext AS completedtext, 
   (SELECT COUNT(Players.p_id) FROM Games LEFT JOIN Players ON Players.p_game = Games.g_id WHERE Players.p_game = g.g_id) AS players, 
   (SELECT COUNT(Tags.t_id) FROM Tags INNER JOIN Games ON Tags.t_game = Games.g_id WHERE Tags.t_game = g.g_id) AS tags 
@@ -69,8 +69,8 @@ exports.get_game = (req, res, next) => {
  */
 exports.create_game = (req, res) => {
   const newShortid = shortid.generate();
-  var sql = 'INSERT INTO Games (g_user, g_shortcode, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?,?)';
-  var data = [
+  const sql = 'INSERT INTO Games (g_user, g_shortcode, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?,?)';
+  const data = [
     req.body.user,
     newShortid,
     req.body.name,
@@ -125,7 +125,7 @@ exports.update_game = (req, res) => {
   }
   set = conditions.length ? conditions.join(', ') : '1';
 
-  var sql = `UPDATE Games SET ${set} WHERE g_id = ?`;
+  const sql = `UPDATE Games SET ${set} WHERE g_id = ?`;
   connection.query(sql, [...values, req.params.id], (err, results) => {
     if (err) return next({error: err, message: 'Could not uodate game'});
     res.statusCode = 200;
@@ -157,6 +157,7 @@ exports.update_game = (req, res) => {
 exports.query_games = (req, res, next) => {  
   let conditions = [];
   let values = [];
+  //TODO: consider sql injection cleaning
   let where = '';
 
   if (req.query.user !== undefined) {
@@ -169,7 +170,7 @@ exports.query_games = (req, res, next) => {
   }
   where = conditions.length ? conditions.join(' AND ') : '1';
 
-  var sql = `SELECT * FROM Games WHERE ${where}`;
+  const sql = `SELECT * FROM Games WHERE ${where}`;
   connection.query(sql, values, (err, results) => {
     if (err) return next({error: err, message: 'Error fetching from database'});
     if (results.length === 0) {
@@ -182,7 +183,7 @@ exports.query_games = (req, res, next) => {
 
 //TODO: Delete also related tags, users and usersFoundTags
 exports.delete_game = (req, res, next) => {
-  var sql = `DELETE FROM Games WHERE g_id = ?`;
+  const sql = `DELETE FROM Games WHERE g_id = ?`;
   connection.query(sql, [req.params.id], (err, results) => {
     if (err) return next({error: err, message: 'Could not delete game'});
     res.statusCode = 200;

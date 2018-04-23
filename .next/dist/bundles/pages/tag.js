@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 25);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -180,23 +180,18 @@ var Menu = function (_React$Component) {
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'a',
-            { href: '/tag/1' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'li',
-              null,
-              'tag'
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'li',
             null,
             'Hints'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'li',
-            null,
-            'Leaderboard'
+            'a',
+            { href: '/results' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              'Leaderboard'
+            )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'a',
@@ -251,14 +246,16 @@ module.exports = require("https");
 /* 20 */,
 /* 21 */,
 /* 22 */,
-/* 23 */
+/* 23 */,
+/* 24 */,
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(24);
+module.exports = __webpack_require__(26);
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -267,13 +264,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_next_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Header__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Menu__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -304,6 +303,8 @@ var agent = new https.Agent(agentOptions);
 
 
 
+
+
 var _class = function (_React$Component) {
   _inherits(_class, _React$Component);
 
@@ -328,17 +329,16 @@ var _class = function (_React$Component) {
                 if (!req.user) {
                   res.redirect('../createuser');
                 }
-                console.log(req.user);
 
-                _context.next = 8;
+                _context.next = 7;
                 return __WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch___default()('https://' + req.headers.host + '/tags/' + id, { agent: agent });
 
-              case 8:
+              case 7:
                 json = _context.sent;
-                _context.next = 11;
+                _context.next = 10;
                 return json.json();
 
-              case 11:
+              case 10:
                 data = _context.sent;
                 return _context.abrupt('return', {
                   id: id,
@@ -346,7 +346,7 @@ var _class = function (_React$Component) {
                   user: req.user
                 });
 
-              case 13:
+              case 12:
               case 'end':
                 return _context.stop();
             }
@@ -368,17 +368,33 @@ var _class = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
     _this.componentDidMount = function () {
-      console.log('user:');
       if (!window.localStorage.getItem('NFCHUNT_USER')) {
         window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
-        window.localStorage.setItem('NFCHUNT_GAME', _this.state.tag.game_id);
+        window.localStorage.setItem('NFCHUNT_GAME', _this.state.user.p_game);
+      }
+      if (_this.state.user.p_game == _this.state.tag.game_id) {
+        __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["postFoundTag"](_this.state.user, _this.state.tag).then(function (res) {
+          if (res.status == 201 || res.status == 200 || res.status == 304) {
+            console.log('getting hint');
+            __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
+              return _this.setState({ hint: data.hint });
+            });
+          } else if (res.status == 303) {
+            _this.setState({ gamestatus: 'won' });
+          }
+        });
+      } else {
+        __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
+          return _this.setState({ hint: data.hint });
+        });
       }
     };
 
     _this.state = {
       id: props.id,
       tag: props.tag,
-      user: props.user
+      user: props.user,
+      gamestatus: 'tagfound'
     };
     return _this;
   }
@@ -392,20 +408,33 @@ var _class = function (_React$Component) {
         null,
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Header__["default"], null),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'h2',
+          null,
+          'You found tag ',
+          tag.tag,
+          '!'
+        ),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'p',
+          null,
+          'from ',
+          tag.game
+        ),
+        this.state.gamestatus == 'tagfound' ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'div',
+          null,
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'div',
+            { className: 'hint' },
+            this.state.hint
+          )
+        ) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'div',
           null,
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'h2',
             null,
-            'You found ',
-            tag.tag,
-            '!'
-          ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'p',
-            null,
-            'from ',
-            tag.game
+            'Grats! You won!'
           )
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_Menu__["default"], { user: this.props.user }),
@@ -420,10 +449,62 @@ var _class = function (_React$Component) {
 /* harmony default export */ __webpack_exports__["default"] = (_class);
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports) {
 
 module.exports = require("next/router");
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.getTag = function (id) {
+  return new Promise(function (resolve, reject) {
+    fetch('https://' + window.location.host + '/tags/' + id).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return resolve(data);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+};
+
+exports.getHint = function (playerId) {
+  return new Promise(function (resolve, reject) {
+    fetch('https://' + window.location.host + '/hint/' + playerId).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return resolve(data);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+};
+
+exports.postFoundTag = function (p, t) {
+  return new Promise(function (resolve, reject) {
+    fetch('https://' + window.location.host + '/tagsfound', {
+      body: JSON.stringify({
+        tag: t.tag_id,
+        player: p.p_id,
+        game: t.game_id,
+        current: p.p_current
+      }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (res) {
+      return resolve(res);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+};
 
 /***/ })
 /******/ ]);

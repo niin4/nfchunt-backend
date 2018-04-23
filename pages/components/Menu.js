@@ -16,9 +16,8 @@ export default class Menu extends React.Component {
         <nav className='navigation'>
           <ul>
             <a href='/game'><li>Game</li></a>
-            <a href='/tag/1'><li>tag</li></a>
             <li>Hints</li>
-            <li>Leaderboard</li>
+            <a href='/results'><li>Leaderboard</li></a>
             <a href='/'><li>Info</li></a>
           </ul>
         </nav>

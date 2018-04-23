@@ -28,7 +28,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 // session
 const sess = {
   secret: 'keyboard cat',
-  cookie: { maxAge: 60000 }
+  cookie: { }
 }
 
 server.use(session(sess));

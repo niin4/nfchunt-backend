@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -123,7 +123,105 @@ var Header = function Header() {
 /* harmony default export */ __webpack_exports__["default"] = (Header);
 
 /***/ }),
-/* 4 */,
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var Menu = function (_React$Component) {
+  _inherits(Menu, _React$Component);
+
+  function Menu(props) {
+    _classCallCheck(this, Menu);
+
+    return _possibleConstructorReturn(this, (Menu.__proto__ || Object.getPrototypeOf(Menu)).call(this, props));
+  }
+
+  _createClass(Menu, [{
+    key: 'render',
+    value: function render() {
+      return !this.props.user ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'nav',
+        { className: 'navigation' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            'Info'
+          )
+        )
+      ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'nav',
+        { className: 'navigation' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ul',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '/game' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              'Game'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '/tag/1' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              'tag'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            'Hints'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '/leaderboard' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              'Leaderboard'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '/' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'li',
+              null,
+              'Info'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Menu;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Menu);
+
+/***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
@@ -155,16 +253,14 @@ module.exports = require("https");
 /* 18 */,
 /* 19 */,
 /* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(24);
+module.exports = __webpack_require__(22);
 
 
 /***/ }),
-/* 24 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -176,7 +272,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Menu__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -205,6 +302,19 @@ var agent = new https.Agent(agentOptions);
 
 
 
+
+var LeaderboardList = function LeaderboardList(leaderboard) {
+  return leaderboard.map(function (item) {
+    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+      'li',
+      null,
+      item.player,
+      ' ',
+      item.count
+    );
+  });
+};
+
 var _class = function (_React$Component) {
   _inherits(_class, _React$Component);
 
@@ -212,23 +322,38 @@ var _class = function (_React$Component) {
     key: 'getInitialProps',
     value: function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref) {
-        var req = _ref.req;
-        var gameId;
+        var req = _ref.req,
+            res = _ref.res;
+        var id, json, data;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                gameId = 1;
+                id = 1;
 
+                if (!req.user) {
+                  req.session.redirect = 'game';
+                  res.redirect('../createuser');
+                } else {
+                  id = req.user.p_game;
+                }
 
-                req.session.redirect = 'game';
-                req.session.redirecttype = 'game';
-
-                return _context.abrupt('return', {
-                  game: gameId
-                });
+                _context.next = 4;
+                return __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default()('https://' + req.headers.host + '/leaderboard/' + id + '}', { agent: agent });
 
               case 4:
+                json = _context.sent;
+                _context.next = 7;
+                return json.json();
+
+              case 7:
+                data = _context.sent;
+                return _context.abrupt('return', {
+                  user: req.user,
+                  leaderboard: data
+                });
+
+              case 9:
               case 'end':
                 return _context.stop();
             }
@@ -249,65 +374,37 @@ var _class = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
-    _this.createUser = function (evt) {
-      if (!_this.state.user.length) {
-        evt.preventDefault();
-        console.log('Missing username');
+    _this.componentDidMount = function () {
+      console.log('user:');
+      if (!window.localStorage.getItem('NFCHUNT_USER')) {
+        window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
+        window.localStorage.setItem('NFCHUNT_GAME', _this.state.game.id);
       }
     };
 
-    _this.handleChange = function (evt) {
-      _this.setState({ user: event.target.value });
-    };
-
     _this.state = {
-      game: props.game,
-      user: ''
+      user: props.user,
+      leaderboard: props.leaderboard
     };
     return _this;
   }
 
-  //TODO: make error
-
-
   _createClass(_class, [{
     key: 'render',
     value: function render() {
+      var leaderboard = this.props.game;
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
         null,
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Header__["default"], null),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
+          'h2',
           null,
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'h3',
-            null,
-            'Game 1 login'
-          ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'h2',
-            null,
-            'Log in:'
-          ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'form',
-            { action: '/login', method: 'POST', onSubmit: this.createUser },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', name: 'id', value: this.state.user, onChange: this.handleChange }),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'hidden', name: 'game', value: this.state.game }),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              'button',
-              { type: 'submit' },
-              'Create user'
-            )
-          )
+          leaderboard[0].game
         ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'p',
-          null,
-          this.state.user
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Footer__["default"], null)
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(LeaderboardList, { leaderboard: leaderboard }),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
       );
     }
   }]);

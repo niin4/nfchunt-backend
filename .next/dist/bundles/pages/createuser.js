@@ -345,6 +345,7 @@ var _class = function (_React$Component) {
                 _this2.handleChange(evt);
               } }),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'hidden', name: 'game', value: tag.game_id }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'hidden', name: 'tag', value: tag.tag_id }),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               'button',
               { type: 'submit' },

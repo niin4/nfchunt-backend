@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -w pages -w scss -e js,scss -x \"npm run build\"",
     "build": "next build",
-    "start": "supervisor -w server.js, controllers/, routes/ server.js",
+    "start": "supervisor -w server.js, controllers/, routes/, helpers/ server.js",
     "apidoc": "apidoc -i controllers/ -o www/apidoc/"
   },
   "author": "",
