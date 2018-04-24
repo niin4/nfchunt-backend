@@ -1,0 +1,6 @@
+{
+    "host"     : "localhost",
+    "user"     : "root",
+    "password" : "",
+    "database" : "nhf_hunt"
+  }

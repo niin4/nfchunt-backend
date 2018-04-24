@@ -68,6 +68,7 @@ exports.get_game = (req, res, next) => {
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.create_game = (req, res) => {
+  console.log(req.body.user);
   const newShortid = shortid.generate();
   const sql = 'INSERT INTO Games (g_user, g_shortcode, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?,?)';
   const data = [

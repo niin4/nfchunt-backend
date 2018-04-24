@@ -35,6 +35,9 @@ server.use(session(sess));
 server.use(passport.initialize());
 server.use(passport.session());
 
+//cors
+server.use(cors());
+
 // for jelastic
 server.enable('trust proxy');
 
