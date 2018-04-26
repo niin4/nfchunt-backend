@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = (app, passport) => {
-  require('./gamesRoutes')(app);
-  require('./tagRoutes')(app);
-  require('./playerRoutes')(app);
+  require('./gamesRoutes')(app, passport);
+  require('./tagRoutes')(app, passport);
+  require('./playerRoutes')(app, passport);
   require('./loginRoutes')(app, passport);
 
 }

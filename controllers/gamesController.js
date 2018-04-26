@@ -68,11 +68,11 @@ exports.get_game = (req, res, next) => {
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.create_game = (req, res) => {
-  console.log(req.body.user);
+  console.log(req.user);
   const newShortid = shortid.generate();
   const sql = 'INSERT INTO Games (g_user, g_shortcode, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?,?)';
   const data = [
-    req.body.user,
+    req.user.u_id,
     newShortid,
     req.body.name,
     req.body.welcometext,
@@ -156,23 +156,9 @@ exports.update_game = (req, res) => {
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.query_games = (req, res, next) => {  
-  let conditions = [];
-  let values = [];
-  //TODO: consider sql injection cleaning
-  let where = '';
-
-  if (req.query.user !== undefined) {
-    conditions.push('g_user = ?');
-    values.push(req.query.user)
-  } 
-  if (req.query.game !== undefined) {
-    conditions.push('g_id = ?');
-    values.push(req.query.game)
-  }
-  where = conditions.length ? conditions.join(' AND ') : '1';
-
-  const sql = `SELECT * FROM Games WHERE ${where}`;
-  connection.query(sql, values, (err, results) => {
+  const user = req.user.u_id;
+  const sql = `SELECT * FROM Games WHERE g_user = ?`;
+  connection.query(sql, [user], (err, results) => {
     if (err) return next({error: err, message: 'Error fetching from database'});
     if (results.length === 0) {
       return next({status: 404, message: 'No games found'});
