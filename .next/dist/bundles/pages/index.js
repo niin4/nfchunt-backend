@@ -288,7 +288,16 @@ var _class = function (_React$Component) {
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'div',
           { className: 'box' },
-          'NFC Hunt is a game about hunting tresures and clues utilizing NFC Tags. Simple to set up and players only need their mobile device to play.'
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'h2',
+            null,
+            'About NFC Hunt'
+          ),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'p',
+            null,
+            'NFC Hunt is a game about hunting tresures and clues utilizing NFC Tags. Simple to set up and players only need their mobile device to play.'
+          )
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Footer__["default"], null)

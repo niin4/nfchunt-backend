@@ -345,7 +345,7 @@ var _class = function (_React$Component) {
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'hidden', name: 'tag', value: tag.tag_id }),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               'button',
-              { className: 'button button--red', type: 'submit' },
+              { className: 'button button--yellow', type: 'submit' },
               'Create user'
             )
           )

@@ -1,10 +1,20 @@
 .button {
   border: 0;
   text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  letter-spacing: 1;
   font-weight: bold;
+  padding: 0.8em;
+  border-radius: 2px;
 }
 
 .button--red {
   color: #fff;
   background-color: $COLOR_RED;
+}
+
+.button--yellow {
+  color: #fff;
+  background-color: $COLOR_YELLOW;
 }

@@ -22,8 +22,12 @@ export default class extends React.Component {
     return (
       <div className='container'>
         <Header />
-        <div className='box'>NFC Hunt is a game about hunting tresures and clues utilizing NFC
-          Tags. Simple to set up and players only need their mobile device to play.</div>
+        <div className='box'>
+          <h2>About NFC Hunt</h2>
+          <p>NFC Hunt is a game about hunting tresures and clues utilizing NFC
+          Tags. Simple to set up and players only need their mobile device to play.
+          </p>
+        </div>
         <Menu user={this.props.user} />
         <Footer />
       </div>
