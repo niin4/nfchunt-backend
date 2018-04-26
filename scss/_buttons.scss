@@ -3,18 +3,39 @@
   text-transform: uppercase;
   width: 100%;
   text-align: center;
-  letter-spacing: 1;
+  letter-spacing: 1px;
   font-weight: bold;
   padding: 0.8em;
   border-radius: 2px;
+  margin: 0.8em 0;
 }
 
 .button--red {
   color: #fff;
-  background-color: $COLOR_RED;
+  background: $COLOR_RED;
+  -moz-box-shadow:inset 0px 1px 0px 0px #ffbace;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffbace;
+	box-shadow:inset 0px 1px 0px 0px #ffbace;
+  background-image: -webkit-linear-gradient(top, #f54870, #d61a46);
+  background-image: -moz-linear-gradient(top, #f35479, #f2335e);
+  background-image: -ms-linear-gradient(top, #f35479, #f2335e);
+  background-image: -o-linear-gradient(top, #f35479, #f2335e);
+  background-image: linear-gradient(to bottom, #f35479, #f2335e);
+  border:1px solid #ed5197;
+  text-shadow:0px 1px 0px #f2335e;
 }
 
 .button--yellow {
   color: #fff;
-  background-color: $COLOR_YELLOW;
+  background: $COLOR_YELLOW;
+  -moz-box-shadow:inset 0px 1px 0px 0px #f0d3a0;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f0d3a0;
+	box-shadow:inset 0px 1px 0px 0px #f0d3a0;
+  background-image: -webkit-linear-gradient(top, #f59e03, #c07a00);
+  background-image: -moz-linear-gradient(top, #f59e03, #c07a00);
+  background-image: -ms-linear-gradient(top, #f59e03, #c07a00);
+  background-image: -o-linear-gradient(top, #f59e03, #c07a00);
+  background-image: linear-gradient(to bottom, #f59e03, #c07a00);
+  border:1px solid #c07a00;
+  text-shadow:0px 1px 0px #c07a00;
 }
