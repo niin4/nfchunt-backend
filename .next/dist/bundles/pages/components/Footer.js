@@ -97,11 +97,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var Footer = function Footer() {
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'footer',
-    null,
-    '\xA9 NFC Hunt 2018'
-  );
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('footer', null);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Footer);

@@ -75,8 +75,9 @@ export default class extends React.Component {
   render() {
     const tag = this.props.tag;
     return (
-      <div>
+      <div className='container'>
         <Header />
+        <div className='box'>
         <h2>You found tag {tag.tag}!</h2>
         <p>from {tag.game}</p>
         {this.state.gamestatus == 'tagfound' ?
@@ -87,6 +88,7 @@ export default class extends React.Component {
           <div>
             <h2>Grats! You won!</h2>
           </div>}
+        </div>
         <Menu user={this.props.user} />
         <Footer />
       </div>

@@ -1,7 +1,36 @@
 @import 'colors';
 @import 'navigation';
+@import 'buttons';
+
 
 body {
   margin: 0;
-  background-color: $badass;
+  background-color: #000;
+  background: url('/public/background.jpg');
+  color: $COLOR_DARK;
+  font-family: 'Roboto Slab', Serif;
+}
+h1, h2, h3, h4, h5 {
+  font-family: 'Ruda', Sans-Serif;
+}
+
+.container {
+  position: relative;
+  height: 100vh;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  margin: 1em 2em 1em;
+  border-radius: 2px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }

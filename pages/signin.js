@@ -48,15 +48,15 @@ export default class extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='container'>
         <Header />
-        <div>
+        <div className='box'>
           <h3>Game 1 login</h3>
           <h2>Log in:</h2>
           <form action='/login' method='POST' onSubmit={this.createUser}>
             <input type='text' name='id' value={this.state.user} onChange={this.handleChange} />
             <input type='hidden' name='game' value={this.state.game} />
-            <button type='submit'>Create user</button>
+            <button className='button button--red' type='submit'>Log in</button>
           </form>
         </div>
         <p>{this.state.user}</p>

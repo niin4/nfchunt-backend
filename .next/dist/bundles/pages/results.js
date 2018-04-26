@@ -93,11 +93,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var Footer = function Footer() {
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'footer',
-    null,
-    '\xA9 NFC Hunt 2018'
-  );
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('footer', null);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
@@ -393,22 +389,30 @@ var _class = function (_React$Component) {
       var leaderboard = this.props.leaderboard;
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
-        null,
+        { className: 'container' },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Header__["default"], null),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'h2',
-          null,
-          'Leaderboard'
+          'div',
+          { className: 'box' },
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'h2',
+            null,
+            'Leaderboard'
+          ),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'ul',
+            null,
+            leaderboard.map(function (item) {
+              return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'li',
+                { key: item.player },
+                item.player,
+                ' ',
+                item.count
+              );
+            })
+          )
         ),
-        leaderboard.map(function (item) {
-          return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'li',
-            { key: item.player },
-            item.player,
-            ' ',
-            item.count
-          );
-        }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
       );

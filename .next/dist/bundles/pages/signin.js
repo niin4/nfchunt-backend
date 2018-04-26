@@ -93,11 +93,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var Footer = function Footer() {
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'footer',
-    null,
-    '\xA9 NFC Hunt 2018'
-  );
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('footer', null);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
@@ -278,11 +274,11 @@ var _class = function (_React$Component) {
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
-        null,
+        { className: 'container' },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Header__["default"], null),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'div',
-          null,
+          { className: 'box' },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'h3',
             null,
@@ -300,8 +296,8 @@ var _class = function (_React$Component) {
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'hidden', name: 'game', value: this.state.game }),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               'button',
-              { type: 'submit' },
-              'Create user'
+              { className: 'button button--red', type: 'submit' },
+              'Log in'
             )
           )
         ),

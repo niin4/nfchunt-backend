@@ -93,11 +93,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var Footer = function Footer() {
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'footer',
-    null,
-    '\xA9 NFC Hunt 2018'
-  );
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('footer', null);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
@@ -438,39 +434,43 @@ var _class = function (_React$Component) {
       console.log(hints);
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
-        null,
+        { className: 'container' },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Header__["default"], null),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'h2',
-          null,
-          'Current hint:'
-        ),
-        this.state.hint,
-        !hints.status ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'div',
-          null,
+          { className: 'box' },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'h3',
+            'h2',
             null,
-            'Found tags:'
+            'Current hint:'
           ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'ul',
+          this.state.hint,
+          !hints.status ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'div',
             null,
-            hints.map(function (hint) {
-              return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                'li',
-                { key: hint.id },
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                  'h4',
-                  null,
-                  hint.tag
-                ),
-                hint.hint
-              );
-            })
-          )
-        ) : null,
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+              'h3',
+              null,
+              'Found tags:'
+            ),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+              'ul',
+              null,
+              hints.map(function (hint) {
+                return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'li',
+                  { key: hint.id },
+                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                    'h4',
+                    null,
+                    hint.tag
+                  ),
+                  hint.hint
+                );
+              })
+            )
+          ) : null
+        ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
       );

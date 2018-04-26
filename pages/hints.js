@@ -61,22 +61,24 @@ export default class extends React.Component {
     const hints = this.props.hints;
     console.log(hints);
     return (
-      <div>
+      <div className='container'>
         <Header />
-        <h2>Current hint:</h2>
-        {this.state.hint}
-        {!hints.status ?
-          <div>
-            <h3>Found tags:</h3>
-            <ul>
-              {hints.map((hint) =>
-                <li key={hint.id}>
-                  <h4>{hint.tag}</h4>
-                  {hint.hint}
-                </li>
-              )}
-            </ul>
-          </div> : null}
+        <div className='box'>
+          <h2>Current hint:</h2>
+          {this.state.hint}
+          {!hints.status ?
+            <div>
+              <h3>Found tags:</h3>
+              <ul>
+                {hints.map((hint) =>
+                  <li key={hint.id}>
+                    <h4>{hint.tag}</h4>
+                    {hint.hint}
+                  </li>
+                )}
+              </ul>
+            </div> : null}
+        </div>
         <Menu user={this.props.user} />
         <Footer />
       </div>

@@ -59,12 +59,16 @@ export default class extends React.Component {
   render() {
     const leaderboard = this.props.leaderboard;
     return (
-      <div>
+      <div className='container'>
         <Header />
-        <h2>Leaderboard</h2>
-        {leaderboard.map((item) => 
-          <li key={item.player}>{item.player} {item.count}</li>
-        )}
+        <div className='box'>
+          <h2>Leaderboard</h2>
+          <ul>
+            {leaderboard.map((item) =>
+              <li key={item.player}>{item.player} {item.count}</li>
+            )}
+          </ul>
+        </div>
         <Menu user={this.props.user} />
         <Footer />
       </div>

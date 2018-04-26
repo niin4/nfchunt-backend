@@ -16,7 +16,7 @@ import Menu from './components/Menu';
 import Footer from './components/Footer';
 
 const Game = (props) => (
-  <div>
+  <div className='box'>
     <h2>{props.game.name}</h2>
     <h4>Players: {props.game.players}</h4>
     <h4>Tags: {props.game.tags}</h4>
@@ -64,7 +64,7 @@ export default class extends React.Component {
   render() {
     const game = this.props.game;
     return (
-      <div>
+      <div className='container'>
         <Header/>
         <Game game={game}/>
         <Menu user={this.props.user} />

@@ -1,11 +1,11 @@
 'use strict';
 
-module.exports = function(app) {
+module.exports = function(app, passport) {
   var tagController = require('../controllers/tagController');
 
   app.route('/tags')
   .get(tagController.query_tags)
-  .post(tagController.create_tag);
+  .post(passport.authenticate('jwt', {session: false}), tagController.create_tag);
 
   app.route('/tags/:id')
   .get(tagController.get_tag);
