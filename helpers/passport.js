@@ -144,7 +144,7 @@ module.exports = (passport) => {
 
 
   passport.use('jwt', new JWTStrategy({
-    jwtFromRequest: ExtractJWT.fromBodyField('token'),
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: `${process.env.NFC_SECRET}`
   },
     function (jwtPayload, cb) {
