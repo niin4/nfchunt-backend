@@ -19,7 +19,6 @@ export default class extends React.Component {
     const gameId = 1;
 
     req.session.redirect = `game`;
-    req.session.redirecttype = 'game';
 
     return {
       game: gameId
@@ -29,8 +28,8 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      game: props.game,
-      user: ''
+      game: '',
+      id: ''
     }
   }
 
@@ -43,7 +42,7 @@ export default class extends React.Component {
   }
 
   handleChange = (evt) => {
-    this.setState({ user: event.target.value });
+    this.setState({ [evt.target.name]: event.target.value });
   }
 
   render() {
@@ -54,12 +53,13 @@ export default class extends React.Component {
           <h3>Game 1 login</h3>
           <h2>Log in:</h2>
           <form action='/login' method='POST' onSubmit={this.createUser}>
-            <input type='text' name='id' value={this.state.user} onChange={this.handleChange} />
-            <input type='hidden' name='game' value={this.state.game} />
+            <label for='id'>User:</label><br/>
+            <input type='text' name='id' value={this.state.id} onChange={this.handleChange} />
+            <label for='game'>Game:</label><br/>
+            <input type='text' name='game' value={this.state.game} onChange={this.handleChange}/>
             <button className='button button--red' type='submit'>Log in</button>
           </form>
         </div>
-        <p>{this.state.user}</p>
         <Footer />
       </div>
     )

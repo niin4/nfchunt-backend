@@ -63,18 +63,16 @@ exports.get_game = (req, res, next) => {
  * HTTP  /1.1 200 OK
  *  {
  *    "g_id": 2,
- *    "g_user": "Player1",
- *    "g_shortcode": "rygyB@5cG"
+ *    "g_name": "Fun Game",
+ *    "g_welcometext": "Welcome!",
+ *    "g_completedtext": "Byebye :("
  *  }
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.create_game = (req, res) => {
-  console.log(req.user);
-  const newShortid = shortid.generate();
-  const sql = 'INSERT INTO Games (g_user, g_shortcode, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?,?)';
+  const sql = 'INSERT INTO Games (g_user, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?)';
   const data = [
     req.user.u_id,
-    newShortid,
     req.body.name,
     req.body.welcometext,
     req.body.completedtext

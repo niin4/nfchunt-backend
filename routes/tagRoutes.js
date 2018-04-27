@@ -7,7 +7,7 @@ module.exports = function(app, passport) {
   .get(tagController.query_tags)
   .post(passport.authenticate('jwt', {session: false}), tagController.create_tag);
 
-  app.route('/tags/:id')
+  app.route('/tags/:shortcode')
   .get(tagController.get_tag);
 
   app.route('/tagsfound')

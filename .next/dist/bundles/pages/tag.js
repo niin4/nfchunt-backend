@@ -422,22 +422,20 @@ var _class = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
     _this.componentDidMount = function () {
-      if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== _this.state.user.p_id) {
+      if (!window.localStorage.getItem('NFCHUNT_USER')) {
         window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
         window.localStorage.setItem('NFCHUNT_GAME', _this.state.user.p_game);
       }
       if (_this.state.user.p_game == _this.state.tag.game_id) {
         __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["postFoundTag"](_this.state.user, _this.state.tag).then(function (res) {
           console.log(res.status);
-          if (res.status == 201 || res.status == 200) {
+          if (res.status == 201 || res.status == 200 || res.status == 304) {
             console.log('getting hint');
             __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
               return _this.setState({ hint: data.hint });
             });
           } else if (res.status == 303) {
             _this.setState({ gamestatus: 'won' });
-          } else if (res.status == 304) {
-            _this.setState({ gamestatus: 'Duplicate' });
           }
         });
       } else {

@@ -180,6 +180,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -221,13 +223,12 @@ var _class = function (_React$Component) {
 
 
                 req.session.redirect = 'game';
-                req.session.redirecttype = 'game';
 
                 return _context.abrupt('return', {
                   game: gameId
                 });
 
-              case 4:
+              case 3:
               case 'end':
                 return _context.stop();
             }
@@ -256,12 +257,12 @@ var _class = function (_React$Component) {
     };
 
     _this.handleChange = function (evt) {
-      _this.setState({ user: event.target.value });
+      _this.setState(_defineProperty({}, evt.target.name, event.target.value));
     };
 
     _this.state = {
-      game: props.game,
-      user: ''
+      game: '',
+      id: ''
     };
     return _this;
   }
@@ -292,19 +293,26 @@ var _class = function (_React$Component) {
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'form',
             { action: '/login', method: 'POST', onSubmit: this.createUser },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', name: 'id', value: this.state.user, onChange: this.handleChange }),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'hidden', name: 'game', value: this.state.game }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+              'label',
+              { 'for': 'id' },
+              'User:'
+            ),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('br', null),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', name: 'id', value: this.state.id, onChange: this.handleChange }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+              'label',
+              { 'for': 'game' },
+              'Game:'
+            ),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('br', null),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', name: 'game', value: this.state.game, onChange: this.handleChange }),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               'button',
               { className: 'button button--red', type: 'submit' },
               'Log in'
             )
           )
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'p',
-          null,
-          this.state.user
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Footer__["default"], null)
       );

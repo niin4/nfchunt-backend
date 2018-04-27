@@ -51,7 +51,7 @@ export default class extends React.Component {
   }
 
   componentDidMount = () => {
-    if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== this.state.user.p_id) {
+    if (!window.localStorage.getItem('NFCHUNT_USER')) {
       window.localStorage.setItem('NFCHUNT_USER', this.state.user.p_id);
       window.localStorage.setItem('NFCHUNT_GAME', this.state.user.p_game);
     }
@@ -59,14 +59,12 @@ export default class extends React.Component {
       actions.postFoundTag(this.state.user, this.state.tag)
         .then((res) => {
           console.log(res.status);
-          if (res.status == 201 || res.status == 200) {
+          if (res.status == 201 || res.status == 200 || res.status == 304) {
             console.log('getting hint');
             actions.getHint(this.state.user.p_id)
               .then((data) => this.setState({ hint: data.hint }));
           } else if (res.status == 303) {
             this.setState({ gamestatus: 'won' })
-          } else if (res.status == 304) {
-            this.setState({ gamestatus: 'Duplicate'})
           }
         })
     } else {

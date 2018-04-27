@@ -92,7 +92,6 @@ module.exports = (passport) => {
           return done({ error: 'Invalid user game combination' }); // create the loginMessage and save it to session as flashdata
 
         // all is well, return successful user
-        console.log(rows[0]);
         return done(null, rows[0]);
 
       });
