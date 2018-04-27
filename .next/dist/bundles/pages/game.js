@@ -297,7 +297,7 @@ var Game = function Game(props) {
     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       'h2',
       null,
-      props.game.name
+      props.game.g_name
     ),
     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       'h4',
@@ -314,7 +314,7 @@ var Game = function Game(props) {
     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       'p',
       null,
-      props.game.welcometext
+      props.game.g_welcometext
     )
   );
 };

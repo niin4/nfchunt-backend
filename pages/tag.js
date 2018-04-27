@@ -58,12 +58,15 @@ export default class extends React.Component {
     if (this.state.user.p_game == this.state.tag.game_id) {
       actions.postFoundTag(this.state.user, this.state.tag)
         .then((res) => {
-          if (res.status == 201 || res.status == 200 || res.status == 304) {
+          console.log(res.status);
+          if (res.status == 201 || res.status == 200) {
             console.log('getting hint');
             actions.getHint(this.state.user.p_id)
               .then((data) => this.setState({ hint: data.hint }));
           } else if (res.status == 303) {
             this.setState({ gamestatus: 'won' })
+          } else if (res.status == 304) {
+            this.setState({ gamestatus: 'Duplicate'})
           }
         })
     } else {
@@ -73,22 +76,26 @@ export default class extends React.Component {
   }
 
   render() {
-    const tag = this.props.tag;
+    const tag = this.state.tag;
     return (
       <div className='container'>
         <Header />
-        <div className='box'>
-        <h2>You found tag {tag.tag}!</h2>
-        <p>from {tag.game}</p>
-        {this.state.gamestatus == 'tagfound' ?
-          <div>
-            <div className='hint'>{this.state.hint}</div>
-          </div>
-          :
-          <div>
-            <h2>Grats! You won!</h2>
+        {!tag.status ?
+          <div className='box'>
+            <h2>You found tag {tag.tag}!</h2>
+            <p>from {tag.game}</p>
+            {this.state.gamestatus == 'tagfound' ?
+              <div>
+                <div className='hint'>{this.state.hint}</div>
+              </div>
+              :
+              <div>
+                <h2>Grats! You won!</h2>
+              </div>}
+          </div> :
+          <div className='box'>
+            {tag.status}
           </div>}
-        </div>
         <Menu user={this.props.user} />
         <Footer />
       </div>

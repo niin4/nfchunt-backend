@@ -24,7 +24,6 @@ export default class extends React.Component {
     let game = 1;
     if (!req.user) {
       req.session.redirect = `game`;
-      req.session.redirecttype = 'tag';
       res.redirect('../createuser');
     } else {
       id = req.user.p_id;

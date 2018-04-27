@@ -16,8 +16,9 @@ const connection = db();
  *  HTTP  /1.1 200 OK
  *  {
  *    "g_id": 2,
- *    "g_user": "Player1",
- *    "g_shortcode": "rygyB@5cG",
+ *    "g_name": "Fun Game",
+ *    "g_welcometext": "Welcome!",
+ *    "g_completedtext": "Byebye :(",
  * 	  "players": 2,
 *     "tags": 3
  *  }
@@ -26,7 +27,7 @@ const connection = db();
  */
 exports.get_game = (req, res, next) => {
   const sql = `
-  SELECT g_id AS id, g_name AS name, g_welcometext AS welcometext, g_completedtext AS completedtext, 
+  SELECT g_id, g_name, g_welcometext, g_completedtext, 
   (SELECT COUNT(Players.p_id) FROM Games LEFT JOIN Players ON Players.p_game = Games.g_id WHERE Players.p_game = g.g_id) AS players, 
   (SELECT COUNT(Tags.t_id) FROM Tags INNER JOIN Games ON Tags.t_game = Games.g_id WHERE Tags.t_game = g.g_id) AS tags 
   FROM Games AS g WHERE g_id = ? GROUP BY g_id
@@ -157,7 +158,10 @@ exports.update_game = (req, res) => {
  */
 exports.query_games = (req, res, next) => {  
   const user = req.user.u_id;
-  const sql = `SELECT * FROM Games WHERE g_user = ?`;
+  const sql = `SELECT g_id, g_name, g_welcometext, g_completedtext, 
+  (SELECT COUNT(Players.p_id) FROM Games LEFT JOIN Players ON Players.p_game = Games.g_id WHERE Players.p_game = g.g_id) AS players, 
+  (SELECT COUNT(Tags.t_id) FROM Tags INNER JOIN Games ON Tags.t_game = Games.g_id WHERE Tags.t_game = g.g_id) AS tags 
+  FROM Games AS g WHERE g_user = ? GROUP BY g_id`;
   connection.query(sql, [user], (err, results) => {
     if (err) return next({error: err, message: 'Error fetching from database'});
     if (results.length === 0) {

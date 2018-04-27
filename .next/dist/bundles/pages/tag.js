@@ -428,13 +428,16 @@ var _class = function (_React$Component) {
       }
       if (_this.state.user.p_game == _this.state.tag.game_id) {
         __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["postFoundTag"](_this.state.user, _this.state.tag).then(function (res) {
-          if (res.status == 201 || res.status == 200 || res.status == 304) {
+          console.log(res.status);
+          if (res.status == 201 || res.status == 200) {
             console.log('getting hint');
             __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
               return _this.setState({ hint: data.hint });
             });
           } else if (res.status == 303) {
             _this.setState({ gamestatus: 'won' });
+          } else if (res.status == 304) {
+            _this.setState({ gamestatus: 'Duplicate' });
           }
         });
       } else {
@@ -456,12 +459,12 @@ var _class = function (_React$Component) {
   _createClass(_class, [{
     key: 'render',
     value: function render() {
-      var tag = this.props.tag;
+      var tag = this.state.tag;
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
         { className: 'container' },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Header__["default"], null),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        !tag.status ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'div',
           { className: 'box' },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -494,6 +497,10 @@ var _class = function (_React$Component) {
               'Grats! You won!'
             )
           )
+        ) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          'div',
+          { className: 'box' },
+          tag.status
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_Menu__["default"], { user: this.props.user }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)

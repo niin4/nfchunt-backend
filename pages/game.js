@@ -17,10 +17,10 @@ import Footer from './components/Footer';
 
 const Game = (props) => (
   <div className='box'>
-    <h2>{props.game.name}</h2>
+    <h2>{props.game.g_name}</h2>
     <h4>Players: {props.game.players}</h4>
     <h4>Tags: {props.game.tags}</h4>
-    <p>{props.game.welcometext}</p>
+    <p>{props.game.g_welcometext}</p>
   </div>
 )
 

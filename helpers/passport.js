@@ -2,12 +2,21 @@ const LocalStrategy = require('passport-local').Strategy;
 const JWT = require("passport-jwt");
 const ExtractJWT = JWT.ExtractJwt;
 const JWTStrategy = JWT.Strategy;
+const bcrypt = require('bcrypt-nodejs');
 
 require('isomorphic-unfetch');
 require('es6-promise').polyfill();
 
 const db = require('../dbConnection.js');
 const connection = db();
+
+generateHash = (password) => {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+validPassword = (password, localpass) => {
+  return bcrypt.compareSync(password, localpass);
+};
 
 module.exports = (passport) => {
 
@@ -101,12 +110,13 @@ module.exports = (passport) => {
       const sql = `
         INSERT INTO Users (u_instanceid, u_password) 
         VALUES (?,?)`;
+      const pw = generateHash(req.body.password);
       const data = [
         req.body.instanceid,
-        req.body.password,
+        pw,
       ];
       connection.query(sql, data, (err, result) => {
-        if (err) return done({error: 'Error inserting data'});
+        if (err) return done({error: err});
         const sql = 'SELECT u_id, u_instanceid FROM Users WHERE u_id = LAST_INSERT_ID()';
         connection.query(sql, (err, result) => {
           if (err) return done(err);
@@ -124,7 +134,7 @@ module.exports = (passport) => {
     passReqToCallback: true // allows us to pass back the entire request to the callback
   },
     (req, username, password, done) => { // callback with email and password from our form
-      const sql = 'SELECT u_id, u_instanceid FROM Users WHERE u_instanceid = ?';
+      const sql = 'SELECT * FROM Users WHERE u_instanceid = ?';
       connection.query(sql, [username], (err, rows) => {
         if (err)
           return done(err);
@@ -132,12 +142,15 @@ module.exports = (passport) => {
           return done({ error: 'No user found.' }); // req.flash is the way to set flashdata using connect-flash
         }
         // if the user is found but the password is wrong
-        if (!(rows[0].u_password == password))
+        if (!validPassword(password, rows[0].u_password))
           return done({ error: 'Invalid user game combination' }); // create the loginMessage and save it to session as flashdata
 
         // all is well, return successful user
-        return done(null, rows[0]);
-
+        const userData = {
+          u_id: rows[0].u_id,
+          u_instanceid: rows[0].u_instanceid
+        }
+        return done(null, userData);
       });
     }));
 

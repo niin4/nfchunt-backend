@@ -367,7 +367,6 @@ var _class = function (_React$Component) {
 
                 if (!req.user) {
                   req.session.redirect = 'game';
-                  req.session.redirecttype = 'tag';
                   res.redirect('../createuser');
                 } else {
                   id = req.user.p_id;
