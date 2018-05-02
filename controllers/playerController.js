@@ -27,6 +27,25 @@ exports.query_players = (req, res, next) => {
   }); 
 };
 
+/**
+ * @api {post} /players/ Create player
+ * @apiName CreatePlayer
+ * @apiGroup Players
+ * 
+ * @apiParam {String} name Name for player
+ * @apiParam {Number} game Game's id
+ * @apiParam {Number} tag Found tag's id
+ *  
+ * @apiSuccessExample Success-Response:
+ *  HTTP  /1.1 200 OK
+ *  {
+ *    "p_id": 2,
+ *    "p_name": "John",
+ *    "p_game": 1,
+ *    "p_current": 5
+ *  }
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
+ */
 exports.create_player = (req, res, next) => {
   if (req.body.name == undefined || req.body.game == undefined) {
     return next({error: 'Missing parameters' , message: 'Missing parameters'});
@@ -57,6 +76,20 @@ exports.create_player = (req, res, next) => {
 });
 }
 
+/**
+ * @api {get} /hint/:id Get hint for player
+ * @apiName GetHint
+ * @apiGroup Players
+ * 
+ * @apiParam {Number} id Player's id
+ *  
+ * @apiSuccessExample Success-Response:
+ *  HTTP  /1.1 200 OK
+ *  {
+ *    "hint": "Roses are red, ___ are blue..."
+ *  }
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
+ */
 exports.get_hint = (req, res, next) => {
   const sql = `
   SELECT t.t_hint AS hint FROM Tags AS t INNER JOIN Players AS p ON t.t_id = p.p_current

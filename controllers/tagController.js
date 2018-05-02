@@ -5,6 +5,37 @@ shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWX
 const db = require('../dbConnection.js');
 const connection = db();
 
+/**
+ * @api {get} /tags Query tags
+ * @apiName QueryTags
+ * @apiGroup Tags
+ * 
+ * @apiParam {Number} game Game's id
+ * 
+ * @apiExample {curl} Example usage:
+ *     curl -i http://localhost/tags?game=4
+ *  
+ * @apiSuccessExample Success-Response:
+ *  HTTP  /1.1 200 OK
+ *  [
+ *	{
+ *		"t_id": 1,
+ *		"t_game": 1,
+ *		"t_shortcode": "HyKbkI5iz",
+ *		"t_name": "Väinö",
+ *		"t_hint": "Alla omenapuun, ei voi olla kukaan muu, siellä siellä se ___ on..."
+ *	},
+ *	{
+ *		"t_id": 5,
+ *		"t_game": 1,
+ *		"t_shortcode": "xbbBB",
+ *		"t_name": "Kahvi",
+ *		"t_hint": "Elämän eliksiiri"
+ *	}
+ * ]
+ * @apiError (404 Document not found) TagsNotFound No tags found
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
+ */
 exports.query_tags = (req, res, next) => {
   let conditions = [];
   let values = [];
@@ -27,6 +58,28 @@ exports.query_tags = (req, res, next) => {
   });
 };
 
+/**
+ * @api {post} /tags Create tag
+ * @apiName CreateTag
+ * @apiGroup Tags
+ * 
+ * @apiParam {String} name Name for tag
+ * @apiparam {Number} game Tag's game
+ * @apiParam {String} hint Tag's hint
+ * 
+ * @apiHeader {String="Bearer :token"} Authorization Replace <code>:token</code> with supplied JWT-token
+ * 
+ * @apiSuccessExample Success-Response:
+ *  HTTP  /1.1 200 OK
+ *	{
+ *		"t_id": 1,
+ *		"t_game": 1,
+ *		"t_shortcode": "HyKbkI5iz",
+ *		"t_name": "Väinö",
+ *		"t_hint": "Alla omenapuun, ei voi olla kukaan muu, siellä siellä se ___ on..."
+ *	}
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
+ */
 exports.create_tag = (req, res, next) => {
   const newShortid = shortid.generate();
   let sql = 'INSERT INTO Tags (t_game, t_shortcode, t_name, t_hint) VALUES (?,?,?,?)';
@@ -47,6 +100,23 @@ exports.create_tag = (req, res, next) => {
   });
 }
 
+/**
+ * @api {post} /tags/:shortcode Get tag
+ * @apiName GetTag
+ * @apiGroup Tags
+ * 
+ * @apiParam {String} shortcode Tag's shortcode
+ * 
+ * @apiSuccessExample Success-Response:
+ *  HTTP  /1.1 200 OK
+ *	{
+ *		"tag": "Väinö",
+ *		"tag_id": 1,
+ *		"game": "Bileet",
+ *		"game_id": 5,
+ *	}
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
+ */
 exports.get_tag = (req, res, next) => {
   const sql = `SELECT t.t_name AS tag, t.t_id AS tag_id, g.g_name AS game, g.g_id AS game_id 
   FROM Tags AS t 

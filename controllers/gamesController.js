@@ -82,9 +82,7 @@ exports.create_game = (req, res) => {
     const sql = 'SELECT * FROM Games WHERE g_id = LAST_INSERT_ID()';
     connection.query(sql, (err, result) => {
       if (err) return next({error: err, message: 'Error fetching from database'});
-      // The request created a new resource object
       res.statusCode = 201;
-      // The result of CREATE should be the same as GET
       return res.json(result[0]);
   });
 });
@@ -139,7 +137,6 @@ exports.update_game = (req, res) => {
  * @apiGroup Games
  * 
  * @apiParam {String} user  User's id -> Get games by user
- * @apiParam {Number} game  Game's unique id
  * 
  * @apiExample {curl} Example usage:
  *     curl -i http://localhost/games?user=Player1
@@ -148,8 +145,12 @@ exports.update_game = (req, res) => {
  *  HTTP  /1.1 200 OK
  *  {
  *    "g_id": 2,
- *    "g_user": "Player1",
- *    "g_shortcode": "rygyB@5cG"
+ *    "g_name": "Fun Game",
+ *    "g_welcometext": "Welcome!",
+ *    "g_completedtext": "Byebye :(",
+ * 	  "players": 2,
+*     "tags": 3
+ *  
  *  }
  * @apiError (404 Document not found) GamesNotFound Games not found with search parameters.
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
