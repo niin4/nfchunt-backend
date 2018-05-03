@@ -135,7 +135,25 @@ exports.get_tag = (req, res, next) => {
 }
 
 /**
- * @apiDescription Query tags per game or player, returns a list of tags.
+ * @api {get} /tagsfound Query found tags
+ * @apiName QueryTagsfound
+ * @apiGroup Tags
+ * 
+ * @apiParam {Number} [game] Id of the game
+ * @apiParam {Number} [player] Id of the player
+ * 
+ * @apiSuccessExample Success-Response:
+ *  HTTP  /1.1 200 OK
+ *	{
+ *		"id": 1,
+ *		"tag": "Väinö",
+ *		"hint": "Maybe mysterious..",
+ *		"game": "Bileet",
+ *    "player": "Mikko",
+ *    "found": 2018-15-5
+ *	}
+ * @apiError (400 Invalid query) InvalidQueryError Invalid query parameter
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.query_tagsfound = (req, res, next) => {
   let conditions = [];
@@ -178,6 +196,24 @@ exports.query_tagsfound = (req, res, next) => {
   });
 }
 
+/**
+ * @api {post} /tagsfound Post found tag
+ * @apiName PostTagsfound
+ * @apiGroup Tags
+ * @apiDescription Try to post found tag, gives either error 304 of ducplicate entry or marks the tags as found or if player won the game status 303 is given
+ * 
+ * @apiParam {Number} tag Id of the tag
+ * @apiParam {Number} player Id of the player
+ * @apiParam {Number} game Id of the game
+ * 
+ * @apiSuccessExample Success-Response:
+ *  HTTP  /1.1 201 OK
+ *	{
+ *		"status": "Hint updated"
+ *	}
+ * @apiError (304 Duplicate entry) DuplicateEntry Duplicate entry
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
+ */
 exports.tag_found = (req, res, next) => {
   let sql = 'INSERT INTO Tagsfound (tf_tag, tf_player, tf_game) VALUES (?,?,?)';
   let data = [
@@ -190,7 +226,7 @@ exports.tag_found = (req, res, next) => {
       console.log(err.code);
       if (err.code == 'ER_DUP_ENTRY') {
         res.statusCode = 304;
-        res.json({ status: 'Duplicate find' })
+        res.json({ status: 'Duplicate entry' })
       } else {
         return next({ error: err, message: 'Error fetching from database' });
       }
@@ -235,6 +271,25 @@ exports.tag_found = (req, res, next) => {
   });
 }
 
+/**
+ * @api {get} /leaderboard/:game Get leaderboard for game
+ * @apiName Leaderboard
+ * @apiGroup Games
+ * 
+ * @apiParam {Number} game Id of the game
+ * 
+ * @apiSuccessExample Success-Response:
+ *  HTTP  /1.1 202 OK
+ *	[
+ *   {
+ *       "game": "Uusi",
+ *       "player": "Moi",
+ *       "count": 1,
+ *       "lastfound": "2018-04-27T09:04:51.000Z"
+ *   }
+ * ]
+ * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
+ */
 exports.get_leaderboard = (req, res, next) => {
   const sql = `
   SELECT g.g_name AS game, p.p_name AS player, COUNT(tf.tf_player) AS count, MAX(tf.tf_time) AS lastfound
@@ -248,7 +303,7 @@ exports.get_leaderboard = (req, res, next) => {
   connection.query(sql, [req.params.game], (err, results) => {
     if (err) return next({ error: err, message: 'Error fetching from database' });
     if (results.length === 0) {
-      return next({ status: 404, message: 'No Tags found' });
+      return next({ status: 404, message: 'No games found' });
     }
     res.statusCode = 200;
     return res.json(results);
