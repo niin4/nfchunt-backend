@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -79,15 +79,15 @@ module.exports = require("react");
 
 /***/ }),
 
-/***/ 13:
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(2);
+module.exports = __webpack_require__(8);
 
 
 /***/ }),
 
-/***/ 2:
+/***/ 8:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -96,11 +96,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
-var Footer = function Footer() {
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('footer', null);
+var Labelbox = function Labelbox(props) {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "div",
+    { className: "labelbox" },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__title" },
+      props.title
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__body" },
+      props.children
+    )
+  );
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Footer);
+/* harmony default export */ __webpack_exports__["default"] = (Labelbox);
 
 /***/ })
 

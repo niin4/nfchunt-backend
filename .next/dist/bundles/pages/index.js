@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -229,14 +229,16 @@ var Menu = function (_React$Component) {
 /* 18 */,
 /* 19 */,
 /* 20 */,
-/* 21 */
+/* 21 */,
+/* 22 */,
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(22);
+module.exports = __webpack_require__(24);
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -248,7 +250,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Header__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Menu__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scss_styles_scss__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scss_styles_scss__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__scss_styles_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__scss_styles_scss__);
 
 
@@ -296,7 +298,7 @@ var _class = function (_React$Component) {
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'p',
             null,
-            'NFC Hunt is a game about hunting tresures and clues utilizing NFC Tags. Simple to set up and players only need their mobile device to play.'
+            'NFC Hunt is a game about hunting treasures and clues utilizing NFC Tags. Simple to set up and players only need their mobile device to play.'
           )
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
@@ -345,7 +347,7 @@ var _class = function (_React$Component) {
 /* harmony default export */ __webpack_exports__["default"] = (_class);
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports) {
 
 

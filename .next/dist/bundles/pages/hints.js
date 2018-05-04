@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 19);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -232,6 +232,35 @@ module.exports = require("https");
 
 /***/ }),
 /* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+var Labelbox = function Labelbox(props) {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "div",
+    { className: "labelbox" },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__title" },
+      props.title
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__body" },
+      props.children
+    )
+  );
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Labelbox);
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -283,7 +312,6 @@ exports.postFoundTag = function (p, t) {
 };
 
 /***/ }),
-/* 9 */,
 /* 10 */,
 /* 11 */,
 /* 12 */,
@@ -293,14 +321,16 @@ exports.postFoundTag = function (p, t) {
 /* 16 */,
 /* 17 */,
 /* 18 */,
-/* 19 */
+/* 19 */,
+/* 20 */,
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(20);
+module.exports = __webpack_require__(22);
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -314,8 +344,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Menu__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_playeractions_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__helpers_playeractions_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Labelbox__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -347,6 +378,7 @@ var agent = new https.Agent(agentOptions);
 
 
 
+
 var _class = function (_React$Component) {
   _inherits(_class, _React$Component);
 
@@ -361,7 +393,6 @@ var _class = function (_React$Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(req.user);
                 id = 1;
                 game = 1;
 
@@ -373,22 +404,22 @@ var _class = function (_React$Component) {
                   game = req.user.p_game;
                 }
 
-                _context.next = 6;
+                _context.next = 5;
                 return __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default()('https://' + req.headers.host + '/tagsfound?player=' + id + '&game=' + game, { agent: agent });
 
-              case 6:
+              case 5:
                 json = _context.sent;
-                _context.next = 9;
+                _context.next = 8;
                 return json.json();
 
-              case 9:
+              case 8:
                 data = _context.sent;
                 return _context.abrupt('return', {
                   user: req.user,
                   hints: data
                 });
 
-              case 11:
+              case 10:
               case 'end':
                 return _context.stop();
             }
@@ -410,12 +441,11 @@ var _class = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
     _this.componentDidMount = function () {
-      console.log('user:');
       if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== _this.state.user.p_id) {
         window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
         window.localStorage.setItem('NFCHUNT_GAME', _this.state.user.p_game);
       }
-      __WEBPACK_IMPORTED_MODULE_6__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
+      __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
         return _this.setState({ hint: data.hint });
       });
     };
@@ -430,7 +460,6 @@ var _class = function (_React$Component) {
     key: 'render',
     value: function render() {
       var hints = this.props.hints;
-      console.log(hints);
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
         { className: 'container' },
@@ -443,33 +472,32 @@ var _class = function (_React$Component) {
             null,
             'Current hint:'
           ),
-          this.state.hint,
-          !hints.status ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'div',
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'p',
             null,
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              'h3',
-              null,
-              'Found tags:'
-            ),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              'ul',
-              null,
-              hints.map(function (hint) {
-                return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                  'li',
-                  { key: hint.id },
-                  __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                    'h4',
-                    null,
-                    hint.tag
-                  ),
-                  hint.hint
-                );
-              })
-            )
-          ) : null
+            this.state.hint
+          )
         ),
+        !hints.status ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_6__components_Labelbox__["default"],
+          { title: 'Found tags' },
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'ul',
+            null,
+            hints.map(function (hint) {
+              return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                'li',
+                { key: hint.id },
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'h4',
+                  null,
+                  hint.tag
+                ),
+                hint.hint
+              );
+            })
+          )
+        ) : null,
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
       );

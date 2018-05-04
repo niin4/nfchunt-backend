@@ -11,21 +11,7 @@ module.exports = function(app, passport) {
 
   app.route('/games/:id')
   .get(gamesController.get_game)
-  .patch(gamesController.update_game)
-  .delete(gamesController.delete_game);
+  .patch(passport.authenticate('jwt', {session: false}), gamesController.update_game)
+  .delete(passport.authenticate('jwt', {session: false}), gamesController.delete_game);
 
 };
-
-//TODO: 
-
-/*
-
-Create user
-
-Empty game -> Remove found tags table by game
-
-Authenticate device -> instance id?
-
-Authenticate user -> json web token?
-
-*/

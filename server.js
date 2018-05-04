@@ -53,8 +53,6 @@ server.use(handler);
 
 // set up error for api calls
 server.use((err, req, res, next) => {
-  console.log(req);
-  console.log(JSON.stringify(err));
   res.status(err.status || 500).json(err);
   logger.log('error', 'Error', err.message)
 })

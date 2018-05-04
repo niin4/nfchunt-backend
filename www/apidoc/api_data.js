@@ -1,15 +1,5 @@
 define({ "api": [
   {
-    "description": "<p>Query tags per game or player, returns a list of tags.</p>",
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "controllers/tagController.js",
-    "group": "C__wamp64_www_nfc_hunt_api_controllers_tagController_js",
-    "groupTitle": "C__wamp64_www_nfc_hunt_api_controllers_tagController_js",
-    "name": ""
-  },
-  {
     "type": "post",
     "url": "/games/",
     "title": "Create a game",
@@ -132,6 +122,50 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "controllers/gamesController.js",
+    "groupTitle": "Games"
+  },
+  {
+    "type": "get",
+    "url": "/leaderboard/:game",
+    "title": "Get leaderboard for game",
+    "name": "Leaderboard",
+    "group": "Games",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "game",
+            "description": "<p>Id of the game</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP  /1.1 202 OK\n\t[\n  {\n      \"game\": \"Uusi\",\n      \"player\": \"Moi\",\n      \"count\": 1,\n      \"lastfound\": \"2018-04-27T09:04:51.000Z\"\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500 Internal server error": [
+          {
+            "group": "500 Internal server error",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Problem fetching data from database.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "controllers/tagController.js",
     "groupTitle": "Games"
   },
   {
@@ -364,10 +398,24 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Name for tag</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "game",
-            "description": "<p>Game's id</p>"
+            "description": "<p>Tag's game</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "hint",
+            "description": "<p>Tag's hint</p>"
           }
         ]
       }
@@ -388,30 +436,126 @@ define({ "api": [
         ]
       }
     },
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "curl -i http://localhost/tags?game=4",
-        "type": "curl"
-      }
-    ],
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": " HTTP  /1.1 200 OK\n [\n\t{\n\t\t\"t_id\": 1,\n\t\t\"t_game\": 1,\n\t\t\"t_shortcode\": \"HyKbkI5iz\",\n\t\t\"t_name\": \"Väinö\",\n\t\t\"t_hint\": \"Alla omenapuun, ei voi olla kukaan muu, siellä siellä se ___ on...\"\n\t},\n\t{\n\t\t\"t_id\": 5,\n\t\t\"t_game\": 1,\n\t\t\"t_shortcode\": \"xbbBB\",\n\t\t\"t_name\": \"Kahvi\",\n\t\t\"t_hint\": \"Elämän eliksiiri\"\n\t}\n]",
+          "content": " HTTP  /1.1 200 OK\n\t{\n\t\t\"t_id\": 1,\n\t\t\"t_game\": 1,\n\t\t\"t_shortcode\": \"HyKbkI5iz\",\n\t\t\"t_name\": \"Väinö\",\n\t\t\"t_hint\": \"Alla omenapuun, ei voi olla kukaan muu, siellä siellä se ___ on...\"\n\t}",
           "type": "json"
         }
       ]
     },
     "error": {
       "fields": {
-        "404 Document not found": [
+        "500 Internal server error": [
           {
-            "group": "404 Document not found",
+            "group": "500 Internal server error",
             "optional": false,
-            "field": "TagsNotFound",
-            "description": "<p>No tags found</p>"
+            "field": "DatabaseError",
+            "description": "<p>Problem fetching data from database.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "controllers/tagController.js",
+    "groupTitle": "Tags"
+  },
+  {
+    "type": "post",
+    "url": "/tags/:shortcode",
+    "title": "Get tag",
+    "name": "GetTag",
+    "group": "Tags",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "shortcode",
+            "description": "<p>Tag's shortcode</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP  /1.1 200 OK\n\t{\n\t\t\"tag\": \"Väinö\",\n\t\t\"tag_id\": 1,\n\t\t\"game\": \"Bileet\",\n\t\t\"game_id\": 5,\n\t}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500 Internal server error": [
+          {
+            "group": "500 Internal server error",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Problem fetching data from database.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "controllers/tagController.js",
+    "groupTitle": "Tags"
+  },
+  {
+    "type": "post",
+    "url": "/tagsfound",
+    "title": "Post found tag",
+    "name": "PostTagsfound",
+    "group": "Tags",
+    "description": "<p>Try to post found tag, gives either error 304 of ducplicate entry or marks the tags as found or if player won the game status 303 is given</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "tag",
+            "description": "<p>Id of the tag</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "player",
+            "description": "<p>Id of the player</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "game",
+            "description": "<p>Id of the game</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP  /1.1 201 OK\n\t{\n\t\t\"status\": \"Hint updated\"\n\t}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "304 Duplicate entry": [
+          {
+            "group": "304 Duplicate entry",
+            "optional": false,
+            "field": "DuplicateEntry",
+            "description": "<p>Duplicate entry</p>"
           }
         ],
         "500 Internal server error": [
@@ -471,6 +615,65 @@ define({ "api": [
             "optional": false,
             "field": "TagsNotFound",
             "description": "<p>No tags found</p>"
+          }
+        ],
+        "500 Internal server error": [
+          {
+            "group": "500 Internal server error",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Problem fetching data from database.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "controllers/tagController.js",
+    "groupTitle": "Tags"
+  },
+  {
+    "type": "get",
+    "url": "/tagsfound",
+    "title": "Query found tags",
+    "name": "QueryTagsfound",
+    "group": "Tags",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "game",
+            "description": "<p>Id of the game</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "player",
+            "description": "<p>Id of the player</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP  /1.1 200 OK\n\t{\n\t\t\"id\": 1,\n\t\t\"tag\": \"Väinö\",\n\t\t\"hint\": \"Maybe mysterious..\",\n\t\t\"game\": \"Bileet\",\n   \"player\": \"Mikko\",\n   \"found\": 2018-15-5\n\t}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "400 Invalid query": [
+          {
+            "group": "400 Invalid query",
+            "optional": false,
+            "field": "InvalidQueryError",
+            "description": "<p>Invalid query parameter</p>"
           }
         ],
         "500 Internal server error": [

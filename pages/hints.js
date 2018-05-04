@@ -14,12 +14,12 @@ const agent = new https.Agent(agentOptions);
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
+import Labelbox from './components/Labelbox';
 
 import * as actions from '../helpers/playeractions.js';
 
 export default class extends React.Component {
   static async getInitialProps({ req, res }) {
-    console.log(req.user);
     let id = 1;
     let game = 1;
     if (!req.user) {
@@ -45,8 +45,8 @@ export default class extends React.Component {
       user: props.user
     }
   }
+
   componentDidMount = () => {
-    console.log('user:');
     if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== this.state.user.p_id) {
       window.localStorage.setItem('NFCHUNT_USER', this.state.user.p_id);
       window.localStorage.setItem('NFCHUNT_GAME', this.state.user.p_game);
@@ -58,26 +58,25 @@ export default class extends React.Component {
 
   render() {
     const hints = this.props.hints;
-    console.log(hints);
     return (
       <div className='container'>
         <Header />
         <div className='box'>
           <h2>Current hint:</h2>
-          {this.state.hint}
-          {!hints.status ?
-            <div>
-              <h3>Found tags:</h3>
-              <ul>
-                {hints.map((hint) =>
-                  <li key={hint.id}>
-                    <h4>{hint.tag}</h4>
-                    {hint.hint}
-                  </li>
-                )}
-              </ul>
-            </div> : null}
+          <p>{this.state.hint}</p>
         </div>
+        {!hints.status ?
+          <Labelbox title="Found tags">
+            <ul>
+              {hints.map((hint) =>
+                <li key={hint.id}>
+                  <h4>{hint.tag}</h4>
+                  {hint.hint}
+                </li>
+              )}
+            </ul>
+          </Labelbox>
+          : null}
         <Menu user={this.props.user} />
         <Footer />
       </div>

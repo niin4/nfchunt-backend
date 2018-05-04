@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 28);
+/******/ 	return __webpack_require__(__webpack_require__.s = 30);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -232,6 +232,35 @@ module.exports = require("https");
 
 /***/ }),
 /* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+var Labelbox = function Labelbox(props) {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "div",
+    { className: "labelbox" },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__title" },
+      props.title
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__body" },
+      props.children
+    )
+  );
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Labelbox);
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -283,7 +312,6 @@ exports.postFoundTag = function (p, t) {
 };
 
 /***/ }),
-/* 9 */,
 /* 10 */,
 /* 11 */,
 /* 12 */,
@@ -302,14 +330,16 @@ exports.postFoundTag = function (p, t) {
 /* 25 */,
 /* 26 */,
 /* 27 */,
-/* 28 */
+/* 28 */,
+/* 29 */,
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(29);
+module.exports = __webpack_require__(31);
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -318,15 +348,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_next_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Header__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Menu__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Labelbox__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -352,6 +383,7 @@ var agentOptions = {
 };
 
 var agent = new https.Agent(agentOptions);
+
 
 
 
@@ -426,12 +458,11 @@ var _class = function (_React$Component) {
         window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
         window.localStorage.setItem('NFCHUNT_GAME', _this.state.user.p_game);
       }
+      console.log(_this.state.user);
       if (_this.state.user.p_game == _this.state.tag.game_id) {
-        __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["postFoundTag"](_this.state.user, _this.state.tag).then(function (res) {
-          console.log(res.status);
+        __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__["postFoundTag"](_this.state.user, _this.state.tag).then(function (res) {
           if (res.status == 201 || res.status == 200 || res.status == 304) {
-            console.log('getting hint');
-            __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
+            __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
               return _this.setState({ hint: data.hint });
             });
           } else if (res.status == 303) {
@@ -439,7 +470,7 @@ var _class = function (_React$Component) {
           }
         });
       } else {
-        __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
+        __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
           return _this.setState({ hint: data.hint });
         });
       }
@@ -477,28 +508,24 @@ var _class = function (_React$Component) {
             null,
             'from ',
             tag.game
-          ),
-          this.state.gamestatus == 'tagfound' ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'div',
-            null,
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              'div',
-              { className: 'hint' },
-              this.state.hint
-            )
-          ) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'div',
-            null,
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              'h2',
-              null,
-              'Grats! You won!'
-            )
           )
         ) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'div',
           { className: 'box' },
           tag.status
+        ),
+        this.state.gamestatus == 'tagfound' ? __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_7__components_Labelbox__["default"],
+          { title: 'Hint for next' },
+          this.state.hint
+        ) : __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_7__components_Labelbox__["default"],
+          { title: 'Whooppidoop!' },
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'h2',
+            null,
+            'Grats! You won!'
+          )
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_Menu__["default"], { user: this.props.user }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
@@ -512,7 +539,7 @@ var _class = function (_React$Component) {
 /* harmony default export */ __webpack_exports__["default"] = (_class);
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = require("next/router");

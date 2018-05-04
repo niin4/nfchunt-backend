@@ -118,7 +118,7 @@ exports.create_tag = (req, res, next) => {
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.get_tag = (req, res, next) => {
-  const sql = `SELECT t.t_name AS tag, t.t_id AS tag_id, g.g_name AS game, g.g_id AS game_id 
+  const sql = `SELECT t.t_name AS tag, t.t_id AS tag_id, g.g_name AS game, g.g_id AS game_id, g.g_welcometext AS welcometext 
   FROM Tags AS t 
   INNER JOIN Games AS g ON t.t_game = g.g_id
   WHERE t.t_shortcode = ?`;
@@ -176,6 +176,9 @@ exports.query_tagsfound = (req, res, next) => {
       return next({status: 400, message: 'Invalid query parameter'})
     }
   }
+  if (req.query.player == undefined && req.query.game == undefined) {
+    return next({status: 400, message: 'Missing query parameters'})
+  }
   where = conditions.length ? conditions.join(' AND ') : '1';
 
   const sql = `
@@ -200,7 +203,7 @@ exports.query_tagsfound = (req, res, next) => {
  * @api {post} /tagsfound Post found tag
  * @apiName PostTagsfound
  * @apiGroup Tags
- * @apiDescription Try to post found tag, gives either error 304 of ducplicate entry or marks the tags as found or if player won the game status 303 is given
+ * @apiDescription Try to post found tag, gives either error 304 of ducplicate entry or marks the tags as found. If player won the game status 303 is given
  * 
  * @apiParam {Number} tag Id of the tag
  * @apiParam {Number} player Id of the player
@@ -223,7 +226,6 @@ exports.tag_found = (req, res, next) => {
   ];
   connection.query(sql, data, (err, result) => {
     if (err) {
-      console.log(err.code);
       if (err.code == 'ER_DUP_ENTRY') {
         res.statusCode = 304;
         res.json({ status: 'Duplicate entry' })
@@ -246,7 +248,7 @@ exports.tag_found = (req, res, next) => {
           res.statusCode = 303;
           res.json({ status: 'All tags found' })
         } else {
-          // check f player found current hint
+          // check if player found current hint
           // update hint
           if (req.body.tag == req.body.current) {
             let sql = `
@@ -288,6 +290,7 @@ exports.tag_found = (req, res, next) => {
  *       "lastfound": "2018-04-27T09:04:51.000Z"
  *   }
  * ]
+ * @apiError (404 Not found) NoResults No results for game.
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
 exports.get_leaderboard = (req, res, next) => {
@@ -303,7 +306,7 @@ exports.get_leaderboard = (req, res, next) => {
   connection.query(sql, [req.params.game], (err, results) => {
     if (err) return next({ error: err, message: 'Error fetching from database' });
     if (results.length === 0) {
-      return next({ status: 404, message: 'No games found' });
+      return next({ status: 404, message: 'No entries found for game' });
     }
     res.statusCode = 200;
     return res.json(results);

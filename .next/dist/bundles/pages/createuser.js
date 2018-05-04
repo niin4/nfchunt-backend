@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -138,21 +138,51 @@ module.exports = require("es6-promise");
 module.exports = require("https");
 
 /***/ }),
-/* 8 */,
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+var Labelbox = function Labelbox(props) {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "div",
+    { className: "labelbox" },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__title" },
+      props.title
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__body" },
+      props.children
+    )
+  );
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Labelbox);
+
+/***/ }),
 /* 9 */,
 /* 10 */,
 /* 11 */,
 /* 12 */,
 /* 13 */,
 /* 14 */,
-/* 15 */
+/* 15 */,
+/* 16 */,
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(16);
+module.exports = __webpack_require__(18);
 
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -165,6 +195,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Labelbox__ = __webpack_require__(8);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -193,6 +224,7 @@ var agent = new https.Agent(agentOptions);
 
 
 
+
 var _class = function (_React$Component) {
   _inherits(_class, _React$Component);
 
@@ -208,25 +240,21 @@ var _class = function (_React$Component) {
               case 0:
                 splitUrl = req.session.redirect.split('/');
                 id = splitUrl[1];
-
-                console.log('tag id: ' + id);
-                _context.next = 5;
+                _context.next = 4;
                 return __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default()('https://' + req.headers.host + '/tags/' + id, { agent: agent });
 
-              case 5:
+              case 4:
                 res = _context.sent;
-                _context.next = 8;
+                _context.next = 7;
                 return res.json();
 
-              case 8:
+              case 7:
                 data = _context.sent;
-
-                console.log(data);
                 return _context.abrupt('return', {
                   tag: data
                 });
 
-              case 11:
+              case 9:
               case 'end':
                 return _context.stop();
             }
@@ -331,9 +359,14 @@ var _class = function (_React$Component) {
             tag.game
           ),
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'p',
+            null,
+            tag.welcometext
+          ),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'h2',
             null,
-            'Create user:'
+            'Your name:'
           ),
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'form',
@@ -346,14 +379,9 @@ var _class = function (_React$Component) {
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               'button',
               { className: 'button button--yellow', type: 'submit' },
-              'Create user'
+              'Start playing'
             )
           )
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'p',
-          null,
-          this.state.user
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Footer__["default"], null)
       );

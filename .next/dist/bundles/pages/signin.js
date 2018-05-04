@@ -67,23 +67,26 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 28);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports) {
 
 module.exports = require("react");
 
 /***/ }),
-/* 1 */
+
+/***/ 1:
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/regenerator");
 
 /***/ }),
-/* 2 */
+
+/***/ 2:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99,71 +102,16 @@ var Footer = function Footer() {
 /* harmony default export */ __webpack_exports__["default"] = (Footer);
 
 /***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-
-
-var Header = function Header() {
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'header',
-    null,
-    'NFC Hunt'
-  );
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Header);
-
-/***/ }),
-/* 4 */,
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("isomorphic-unfetch");
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("es6-promise");
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("https");
-
-/***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
+/***/ 28:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(27);
+module.exports = __webpack_require__(29);
 
 
 /***/ }),
-/* 27 */
+
+/***/ 29:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -221,7 +169,6 @@ var _class = function (_React$Component) {
               case 0:
                 gameId = 1;
 
-
                 req.session.redirect = 'game';
 
                 return _context.abrupt('return', {
@@ -250,13 +197,14 @@ var _class = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
     _this.createUser = function (evt) {
-      if (!_this.state.user.length) {
+      if (!_this.state.id.length) {
         evt.preventDefault();
         console.log('Missing username');
       }
     };
 
     _this.handleChange = function (evt) {
+      console.log(evt.target.name);
       _this.setState(_defineProperty({}, evt.target.name, event.target.value));
     };
 
@@ -283,7 +231,7 @@ var _class = function (_React$Component) {
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'h3',
             null,
-            'Game 1 login'
+            'Game login'
           ),
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'h2',
@@ -295,14 +243,14 @@ var _class = function (_React$Component) {
             { action: '/login', method: 'POST', onSubmit: this.createUser },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               'label',
-              { 'for': 'id' },
+              null,
               'User:'
             ),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('br', null),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('input', { type: 'text', name: 'id', value: this.state.id, onChange: this.handleChange }),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               'label',
-              { 'for': 'game' },
+              null,
               'Game:'
             ),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('br', null),
@@ -324,5 +272,48 @@ var _class = function (_React$Component) {
 
 /* harmony default export */ __webpack_exports__["default"] = (_class);
 
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+var Header = function Header() {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'header',
+    null,
+    'NFC Hunt'
+  );
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports) {
+
+module.exports = require("isomorphic-unfetch");
+
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, exports) {
+
+module.exports = require("es6-promise");
+
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, exports) {
+
+module.exports = require("https");
+
 /***/ })
-/******/ ]);
+
+/******/ });

@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -231,7 +231,35 @@ module.exports = require("es6-promise");
 module.exports = require("https");
 
 /***/ }),
-/* 8 */,
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+var Labelbox = function Labelbox(props) {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "div",
+    { className: "labelbox" },
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__title" },
+      props.title
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "labelbox__body" },
+      props.children
+    )
+  );
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Labelbox);
+
+/***/ }),
 /* 9 */,
 /* 10 */,
 /* 11 */,
@@ -240,14 +268,16 @@ module.exports = require("https");
 /* 14 */,
 /* 15 */,
 /* 16 */,
-/* 17 */
+/* 17 */,
+/* 18 */,
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(18);
+module.exports = __webpack_require__(20);
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -261,6 +291,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Menu__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Labelbox__ = __webpack_require__(8);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -290,31 +321,33 @@ var agent = new https.Agent(agentOptions);
 
 
 
-var Game = function Game(props) {
+
+var Game = function Game(_ref) {
+  var game = _ref.game;
   return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
     'div',
     { className: 'box' },
     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       'h2',
       null,
-      props.game.g_name
+      game.g_name
     ),
     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-      'h4',
-      null,
+      'span',
+      { className: 'span' },
       'Players: ',
-      props.game.players
+      game.players
     ),
     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-      'h4',
-      null,
+      'span',
+      { className: 'span' },
       'Tags: ',
-      props.game.tags
+      game.tags
     ),
     __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
       'p',
       null,
-      props.game.g_welcometext
+      game.g_welcometext
     )
   );
 };
@@ -325,41 +358,39 @@ var _class = function (_React$Component) {
   _createClass(_class, null, [{
     key: 'getInitialProps',
     value: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref) {
-        var req = _ref.req,
-            res = _ref.res;
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref2) {
+        var req = _ref2.req,
+            res = _ref2.res;
         var id, json, data;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log(req.user);
                 id = 1;
 
                 if (!req.user) {
                   req.session.redirect = 'game';
-                  req.session.redirecttype = 'tag';
                   res.redirect('../createuser');
                 } else {
                   id = req.user.p_game;
                 }
 
-                _context.next = 5;
+                _context.next = 4;
                 return __WEBPACK_IMPORTED_MODULE_2_isomorphic_unfetch___default()('https://' + req.headers.host + '/games/' + id + '}', { agent: agent });
 
-              case 5:
+              case 4:
                 json = _context.sent;
-                _context.next = 8;
+                _context.next = 7;
                 return json.json();
 
-              case 8:
+              case 7:
                 data = _context.sent;
                 return _context.abrupt('return', {
                   user: req.user,
                   game: data
                 });
 
-              case 10:
+              case 9:
               case 'end':
                 return _context.stop();
             }
@@ -368,7 +399,7 @@ var _class = function (_React$Component) {
       }));
 
       function getInitialProps(_x) {
-        return _ref2.apply(this, arguments);
+        return _ref3.apply(this, arguments);
       }
 
       return getInitialProps;
@@ -381,7 +412,6 @@ var _class = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
     _this.componentDidMount = function () {
-      console.log('user:');
       if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== _this.state.user.p_id) {
         window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
         window.localStorage.setItem('NFCHUNT_GAME', _this.state.user.p_game);
@@ -398,12 +428,25 @@ var _class = function (_React$Component) {
   _createClass(_class, [{
     key: 'render',
     value: function render() {
-      var game = this.props.game;
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
         { className: 'container' },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_Header__["default"], null),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(Game, { game: game }),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(Game, { game: this.props.game }),
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_6__components_Labelbox__["default"],
+          { title: 'Player' },
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'h4',
+            null,
+            'Player1'
+          ),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'span',
+            { className: 'span' },
+            'Tags found: 4'
+          )
+        ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
       );

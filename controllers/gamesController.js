@@ -1,7 +1,4 @@
 'use strict';
-const shortid = require('shortid');
-shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
-
 const db = require('../dbConnection.js');
 const connection = db();
 
@@ -19,8 +16,8 @@ const connection = db();
  *    "g_name": "Fun Game",
  *    "g_welcometext": "Welcome!",
  *    "g_completedtext": "Byebye :(",
- * 	  "players": 2,
-*     "tags": 3
+ *    "players": 2,
+ *    "tags": 3
  *  }
  * @apiError (404 Document not found) GameNotFound Game with <code>id</code> was not found.
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
@@ -30,8 +27,7 @@ exports.get_game = (req, res, next) => {
   SELECT g_id, g_name, g_welcometext, g_completedtext, 
   (SELECT COUNT(Players.p_id) FROM Games LEFT JOIN Players ON Players.p_game = Games.g_id WHERE Players.p_game = g.g_id) AS players, 
   (SELECT COUNT(Tags.t_id) FROM Tags INNER JOIN Games ON Tags.t_game = Games.g_id WHERE Tags.t_game = g.g_id) AS tags 
-  FROM Games AS g WHERE g_id = ? GROUP BY g_id
-  `;
+  FROM Games AS g WHERE g_id = ? GROUP BY g_id`;
   connection.query(sql, [req.params.id], (err, results) => {
     if (err) {
       return next({error: err, message: 'Error fetching from database'});
@@ -44,15 +40,14 @@ exports.get_game = (req, res, next) => {
   }); 
 }
 
-/** Create game */
-// TODO: Error if empty fields
- 
 /**
  * @api {post} /games/ Create a game
  * @apiName CreateGame
  * @apiGroup Games
  * 
  * @apiDescription Creates a game and returns the created object.
+ * 
+ * @apiHeader {String="Bearer :token"} Authorization Replace <code>:token</code> with supplied JWT-token
  * 
  * @apiParam {String} user User's id
  * @apiParam {String} name Name for the game
@@ -69,7 +64,10 @@ exports.get_game = (req, res, next) => {
  *  }
  * @apiError (500 Internal server error) DatabaseError Problem fetching data from database.
  */
-exports.create_game = (req, res) => {
+exports.create_game = (req, res, next) => {
+  if (req.user == undefined || req.body.name == undefined || req.body.welcometext == undefined || req.body.completedtext == undefined) {
+    return next({status: 400, message: 'Missing parameters'})
+  }
   const sql = 'INSERT INTO Games (g_user, g_name, g_welcometext, g_completedtext) VALUES (?,?,?,?)';
   const data = [
     req.user.u_id,
@@ -87,10 +85,13 @@ exports.create_game = (req, res) => {
   });
 });
 }
+
 /**
  * @api {patch} /games/:id Update a game
  * @apiName UpdateGame
  * @apiGroup Games
+ * 
+* @apiHeader {String="Bearer :token"} Authorization Replace <code>:token</code> with supplied JWT-token
  * 
  * @apiParam {Number} id Game's id
  * @apiParam {String} [name] New name for the game

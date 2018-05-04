@@ -1,7 +1,4 @@
 'use strict';
-const shortid = require('shortid');
-shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
-
 const db = require('../dbConnection.js');
 const connection = db();
 

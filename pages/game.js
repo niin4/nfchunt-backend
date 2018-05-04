@@ -14,23 +14,22 @@ const agent = new https.Agent(agentOptions);
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
+import Labelbox from './components/Labelbox';
 
-const Game = (props) => (
+const Game = ({game}) => (
   <div className='box'>
-    <h2>{props.game.g_name}</h2>
-    <h4>Players: {props.game.players}</h4>
-    <h4>Tags: {props.game.tags}</h4>
-    <p>{props.game.g_welcometext}</p>
+    <h2>{game.g_name}</h2>
+    <span className="span">Players: {game.players}</span>
+    <span className="span">Tags: {game.tags}</span>
+    <p>{game.g_welcometext}</p>
   </div>
 )
 
 export default class extends React.Component {
   static async getInitialProps({ req, res }) {
-    console.log(req.user);
     let id = 1;
     if (!req.user) {
       req.session.redirect = `game`;
-      req.session.redirecttype= 'tag';
       res.redirect('../createuser');
     } else {
       id = req.user.p_game;
@@ -52,8 +51,8 @@ export default class extends React.Component {
       game: props.game
     }
   }
+
   componentDidMount = () => {
-    console.log('user:');
     if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== this.state.user.p_id) {
       window.localStorage.setItem('NFCHUNT_USER', this.state.user.p_id);
       window.localStorage.setItem('NFCHUNT_GAME', this.state.user.p_game);
@@ -62,11 +61,14 @@ export default class extends React.Component {
 
 
   render() {
-    const game = this.props.game;
     return (
       <div className='container'>
         <Header/>
-        <Game game={game}/>
+        <Game game={this.props.game}/>
+        <Labelbox title="Player">
+          <h4>Player1</h4>
+          <span className="span">Tags found: 4</span>
+        </Labelbox>
         <Menu user={this.props.user} />
         <Footer/>
       </div>

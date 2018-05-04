@@ -159,10 +159,17 @@ module.exports = (passport) => {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: `${process.env.NFC_SECRET}`
   },
-    function (jwtPayload, cb) {
-      console.log(jwtPayload)
-      console.log('checking...')
-      return cb(null, jwtPayload);
+    (jwtPayload, done) => {
+      const sql = 'SELECT * FROM Users WHERE u_id = ?';
+      connection.query(sql, [jwtPayload.u_id], (err, rows) => {
+        if (err)
+          return done(err);
+        if (!rows.length) {
+          return done({ error: 'No user found.' }); // req.flash is the way to set flashdata using connect-flash
+        }
+        return done(null, jwtPayload);
+      });
+
     }
   ));
 };

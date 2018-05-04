@@ -1,6 +1,8 @@
 @import 'colors';
 @import 'navigation';
+@import 'header';
 @import 'buttons';
+@import 'labelbox';
 
 
 body {
@@ -11,6 +13,9 @@ body {
 }
 h1, h2, h3, h4, h5 {
   font-family: 'Ruda', Sans-Serif;
+}
+h4 {
+  margin-top: 0;
 }
 .box {
   display: flex;
@@ -31,4 +36,7 @@ input {
   width: 100%;
   padding: 5px 5px;
   box-sizing: border-box;
+}
+.span {
+  font-weight: bold;
 }

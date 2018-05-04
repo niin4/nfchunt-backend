@@ -9,7 +9,6 @@ module.exports = (app, passport) => {
       if (!user) { return res.redirect('/'); }
       req.logIn(user, (err) => {
         if (err) { return next({ err: err, message: 'Error logging in' }) }
-        console.log('redirecting to ' + req.session.redirect);
         res.redirect('/' + req.session.redirect);
         res.end();
       });
@@ -22,7 +21,6 @@ module.exports = (app, passport) => {
       if (!user) { return res.redirect('/'); }
       req.logIn(user, (err) => {
         if (err) { return next({ err: err, message: 'Error logging in' }) }
-        console.log('redirecting to ' + req.session.redirect);
         res.redirect('/' + req.session.redirect);
         res.end();
       });
@@ -33,8 +31,6 @@ module.exports = (app, passport) => {
     passport.authenticate('app-signup', (err, user, info) => {
       if (err) { return next({ err: err, message: 'Error authenticating' }); }
       req.login(user, {session: false}, (err) => {
-        console.log('logging in');
-        console.log(user);
         if (err) {return next({err: err, message:' Error logging in'}); }
         const token = jwt.sign(JSON.parse(JSON.stringify(user)), `${process.env.NFC_SECRET}`);
         return res.json({token});
@@ -44,7 +40,6 @@ module.exports = (app, passport) => {
 
   app.use('/applogin', (req, res, next) => {
     passport.authenticate('app-login', {session: false}, (err, user, info) => {
-        console.log(err);
         if (err || !user) {
             return res.status(400).json({
                 message: info ? info.message : 'Login failed',
@@ -62,9 +57,6 @@ module.exports = (app, passport) => {
     (req, res);
 });
 
-app.use('/protected', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-  res.json({message: 'success'});
-})
 
 };
 

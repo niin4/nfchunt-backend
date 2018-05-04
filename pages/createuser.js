@@ -13,16 +13,15 @@ const agent = new https.Agent(agentOptions);
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Labelbox from './components/Labelbox';
 
 export default class extends React.Component {
   static async getInitialProps({ req }) {
 
     const splitUrl = req.session.redirect.split('/');
     const id = splitUrl[1];
-    console.log('tag id: ' +id);
     const res = await fetch(`https://${req.headers.host}/tags/${id}`, { agent: agent })
     const data = await res.json();
-    console.log(data);
     return {
       tag: data
     }
@@ -95,15 +94,15 @@ export default class extends React.Component {
         <Header />
         <div className='box'>
           <h3>Game: {tag.game}</h3>
-          <h2>Create user:</h2>
+          <p>{tag.welcometext}</p>    
+          <h2>Your name:</h2>
           <form action='/signup' method='POST' onSubmit={this.createUser}>
             <input type='text' name='name' value={this.state.user} onChange={(evt) => {this.handleChange(evt)}} />
             <input type='hidden' name='game' value={tag.game_id} />
             <input type='hidden' name='tag' value={tag.tag_id} />
-            <button className='button button--yellow' type='submit'>Create user</button>
-          </form>
+            <button className='button button--yellow' type='submit'>Start playing</button>
+          </form>     
         </div>
-        <p>{this.state.user}</p>
         <Footer />
       </div>
     )
