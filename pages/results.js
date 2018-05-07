@@ -14,12 +14,7 @@ const agent = new https.Agent(agentOptions);
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
-
-const LeaderboardList = (leaderboard) => (
-  leaderboard.map((item) => {
-    <li>{item.player} {item.count}</li>
-  })
-)
+import Leaderboard from './components/Leaderboard';
 
 export default class extends React.Component {
   static async getInitialProps({ req, res }) {
@@ -48,7 +43,7 @@ export default class extends React.Component {
     }
   }
   componentDidMount = () => {
-    console.log('user:');
+    console.log(this.state.leaderboard);
     if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== this.state.user.p_id) {
       window.localStorage.setItem('NFCHUNT_USER', this.state.user.p_id);
       window.localStorage.setItem('NFCHUNT_GAME', this.state.user.p_game);
@@ -63,11 +58,7 @@ export default class extends React.Component {
         <Header />
         <div className='box'>
           <h2>Leaderboard</h2>
-          <ul>
-            {leaderboard.map((item) =>
-              <li key={item.player}>{item.player} {item.count}</li>
-            )}
-          </ul>
+         <Leaderboard results={leaderboard}/>
         </div>
         <Menu user={this.props.user} />
         <Footer />

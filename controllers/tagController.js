@@ -302,7 +302,7 @@ exports.get_leaderboard = (req, res, next) => {
   INNER JOIN Players AS p ON tf_player = p_id 
   WHERE tf_game = ? 
   GROUP BY p.p_name
-  ORDER BY count DESC`;
+  ORDER BY count DESC, lastfound ASC`;
   connection.query(sql, [req.params.game], (err, results) => {
     if (err) return next({ error: err, message: 'Error fetching from database' });
     if (results.length === 0) {

@@ -42,7 +42,7 @@ server.use(passport.session());
 server.enable('trust proxy');
 
 // for public files
-server.use('/public', express.static('www'));
+server.use('/public', express.static('public'));
 
 // Set up routes
 require('./routes')(server, passport);

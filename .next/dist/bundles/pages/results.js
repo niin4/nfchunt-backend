@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 28);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -232,7 +232,35 @@ module.exports = require("https");
 
 /***/ }),
 /* 8 */,
-/* 9 */,
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+var Leaderboard = function Leaderboard(_ref) {
+  var results = _ref.results;
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    "ul",
+    { className: "leaderboard" },
+    results.map(function (res) {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "li",
+        { className: "leaderboard__item", key: res.player },
+        res.player,
+        " ",
+        res.count
+      );
+    })
+  );
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Leaderboard);
+
+/***/ }),
 /* 10 */,
 /* 11 */,
 /* 12 */,
@@ -249,14 +277,16 @@ module.exports = require("https");
 /* 23 */,
 /* 24 */,
 /* 25 */,
-/* 26 */
+/* 26 */,
+/* 27 */,
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(27);
+module.exports = __webpack_require__(29);
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -270,6 +300,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Header__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Menu__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Leaderboard__ = __webpack_require__(9);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -299,17 +330,6 @@ var agent = new https.Agent(agentOptions);
 
 
 
-var LeaderboardList = function LeaderboardList(leaderboard) {
-  return leaderboard.map(function (item) {
-    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-      'li',
-      null,
-      item.player,
-      ' ',
-      item.count
-    );
-  });
-};
 
 var _class = function (_React$Component) {
   _inherits(_class, _React$Component);
@@ -371,7 +391,7 @@ var _class = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
     _this.componentDidMount = function () {
-      console.log('user:');
+      console.log(_this.state.leaderboard);
       if (!window.localStorage.getItem('NFCHUNT_USER') || window.localStorage.getItem('NFCHUNT_USER') !== _this.state.user.p_id) {
         window.localStorage.setItem('NFCHUNT_USER', _this.state.user.p_id);
         window.localStorage.setItem('NFCHUNT_GAME', _this.state.user.p_game);
@@ -401,19 +421,7 @@ var _class = function (_React$Component) {
             null,
             'Leaderboard'
           ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'ul',
-            null,
-            leaderboard.map(function (item) {
-              return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                'li',
-                { key: item.player },
-                item.player,
-                ' ',
-                item.count
-              );
-            })
-          )
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_Leaderboard__["default"], { results: leaderboard })
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
