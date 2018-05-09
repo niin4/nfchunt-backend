@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 25);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -261,7 +261,8 @@ var Labelbox = function Labelbox(props) {
 
 /***/ }),
 /* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -313,7 +314,6 @@ exports.postFoundTag = function (p, t) {
 };
 
 /***/ }),
-/* 11 */,
 /* 12 */,
 /* 13 */,
 /* 14 */,
@@ -325,14 +325,16 @@ exports.postFoundTag = function (p, t) {
 /* 20 */,
 /* 21 */,
 /* 22 */,
-/* 23 */
+/* 23 */,
+/* 24 */,
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(24);
+module.exports = __webpack_require__(26);
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -347,7 +349,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Menu__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Labelbox__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__helpers_playeractions_js__);
 
 
@@ -485,7 +487,7 @@ var _class = function (_React$Component) {
           { title: 'Found tags' },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'ul',
-            null,
+            { className: 'foundlist' },
             hints.map(function (hint) {
               return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 'li',
@@ -495,7 +497,11 @@ var _class = function (_React$Component) {
                   null,
                   hint.tag
                 ),
-                hint.hint
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                  'p',
+                  null,
+                  hint.hint
+                )
               );
             })
           )

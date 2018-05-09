@@ -30,17 +30,23 @@
   background-size: cover;
   background-repeat: no-repeat;
   background: url('/public/first.png');
-
 }
 .leaderboard__item:nth-child(2):before {
   background-size: cover;
   background-repeat: no-repeat;
   background: url('/public/second.png');
-
 }
 .leaderboard__item:nth-child(3):before {
   background-size: cover;
   background-repeat: no-repeat;
   background: url('/public/third.png');
+}
 
+.foundlist {
+  h4 {
+    margin-bottom: 0;
+  }
+  p {
+    margin: 0.8em 0 1.4em 0;
+  }
 }

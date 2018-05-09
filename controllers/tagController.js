@@ -295,14 +295,16 @@ exports.tag_found = (req, res, next) => {
  */
 exports.get_leaderboard = (req, res, next) => {
   const sql = `
-  SELECT g.g_name AS game, p.p_name AS player, COUNT(tf.tf_player) AS count, MAX(tf.tf_time) AS lastfound
+  SELECT g.g_name AS game, 
+  p.p_name AS player, 
+  COUNT(tf.tf_id) AS count, 
+  MAX(tf.tf_time) AS lastfound 
   FROM Tagsfound AS tf 
-  INNER JOIN Games AS g ON tf_game = g_id 
-  INNER JOIN Tags AS t ON tf_tag = t_id 
-  INNER JOIN Players AS p ON tf_player = p_id 
-  WHERE tf_game = ? 
-  GROUP BY p.p_name
-  ORDER BY count DESC, lastfound ASC`;
+  LEFT JOIN Games AS g ON tf.tf_game = g.g_id 
+  LEFT JOIN Tags AS t ON tf.tf_tag = t.t_id 
+  LEFT JOIN Players AS p ON tf.tf_player = p.p_id 
+  WHERE tf.tf_game = ? 
+  GROUP BY tf.tf_player ORDER BY count DESC, lastfound ASC`;
   connection.query(sql, [req.params.game], (err, results) => {
     if (err) return next({ error: err, message: 'Error fetching from database' });
     if (results.length === 0) {

@@ -67,7 +67,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 32);
+/******/ 	return __webpack_require__(__webpack_require__.s = 34);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -260,8 +260,24 @@ var Labelbox = function Labelbox(props) {
 /* harmony default export */ __webpack_exports__["default"] = (Labelbox);
 
 /***/ }),
-/* 9 */,
-/* 10 */
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+var Winner = function Winner() {
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'win-animation', src: '../../public/confetti.gif', alt: '' });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Winner);
+
+/***/ }),
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -313,7 +329,6 @@ exports.postFoundTag = function (p, t) {
 };
 
 /***/ }),
-/* 11 */,
 /* 12 */,
 /* 13 */,
 /* 14 */,
@@ -334,14 +349,16 @@ exports.postFoundTag = function (p, t) {
 /* 29 */,
 /* 30 */,
 /* 31 */,
-/* 32 */
+/* 32 */,
+/* 33 */,
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(33);
+module.exports = __webpack_require__(35);
 
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -350,7 +367,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_next_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_next_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_isomorphic_unfetch__);
@@ -358,8 +375,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Menu__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Labelbox__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Winner__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__helpers_playeractions_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__helpers_playeractions_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__helpers_playeractions_js__);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -385,6 +403,7 @@ var agentOptions = {
 };
 
 var agent = new https.Agent(agentOptions);
+
 
 
 
@@ -462,9 +481,9 @@ var _class = function (_React$Component) {
       }
       console.log(_this.state.user);
       if (_this.state.user.p_game == _this.state.tag.game_id) {
-        __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__["postFoundTag"](_this.state.user, _this.state.tag).then(function (res) {
+        __WEBPACK_IMPORTED_MODULE_9__helpers_playeractions_js__["postFoundTag"](_this.state.user, _this.state.tag).then(function (res) {
           if (res.status == 201 || res.status == 200 || res.status == 304) {
-            __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
+            __WEBPACK_IMPORTED_MODULE_9__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
               return _this.setState({ hint: data.hint });
             });
           } else if (res.status == 303) {
@@ -472,7 +491,7 @@ var _class = function (_React$Component) {
           }
         });
       } else {
-        __WEBPACK_IMPORTED_MODULE_8__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
+        __WEBPACK_IMPORTED_MODULE_9__helpers_playeractions_js__["getHint"](_this.state.user.p_id).then(function (data) {
           return _this.setState({ hint: data.hint });
         });
       }
@@ -527,7 +546,8 @@ var _class = function (_React$Component) {
             'h2',
             null,
             'Grats! You won!'
-          )
+          ),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__components_Winner__["default"], null)
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_Menu__["default"], { user: this.props.user }),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Footer__["default"], null)
@@ -541,7 +561,7 @@ var _class = function (_React$Component) {
 /* harmony default export */ __webpack_exports__["default"] = (_class);
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports) {
 
 module.exports = require("next/router");

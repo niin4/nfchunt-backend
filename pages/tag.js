@@ -16,6 +16,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
 import Labelbox from './components/Labelbox';
+import Winner from './components/Winner';
 
 import * as actions from '../helpers/playeractions.js';
 
@@ -93,6 +94,7 @@ export default class extends React.Component {
               :
               <Labelbox title="Whooppidoop!">
                 <h2>Grats! You won!</h2>
+                <Winner />
               </Labelbox>}
         <Menu user={this.props.user} />
         <Footer />

@@ -8,7 +8,7 @@
     "dev": "nodemon -w pages -w scss -e js,scss -x \"npm run build\"",
     "build": "next build",
     "start": "supervisor -w server.js, controllers/, routes/, helpers/ server.js",
-    "apidoc": "apidoc -i controllers/ -o www/apidoc/"
+    "apidoc": "apidoc -i ./ -o public/apidoc/ -e node_modules/"
   },
   "author": "",
   "license": "ISC",

@@ -1,11 +1,55 @@
 [
   {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
+    "type": "",
+    "url": "",
+    "version": "0.0.0",
+    "filename": "./public/apidoc/main.js",
+    "group": "C__wamp64_www_nfc_hunt_api_public_apidoc_main_js",
+    "groupTitle": "C__wamp64_www_nfc_hunt_api_public_apidoc_main_js",
+    "name": ""
+  },
+  {
     "type": "post",
     "url": "/games/",
     "title": "Create a game",
     "name": "CreateGame",
     "group": "Games",
     "description": "<p>Creates a game and returns the created object.</p>",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "allowedValues": [
+              "\"Bearer :token\""
+            ],
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Replace <code>:token</code> with supplied JWT-token</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -62,7 +106,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/gamesController.js",
+    "filename": "./controllers/gamesController.js",
     "groupTitle": "Games"
   },
   {
@@ -121,7 +165,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/gamesController.js",
+    "filename": "./controllers/gamesController.js",
     "groupTitle": "Games"
   },
   {
@@ -154,6 +198,14 @@
     },
     "error": {
       "fields": {
+        "404 Not found": [
+          {
+            "group": "404 Not found",
+            "optional": false,
+            "field": "NoResults",
+            "description": "<p>No results for game.</p>"
+          }
+        ],
         "500 Internal server error": [
           {
             "group": "500 Internal server error",
@@ -165,7 +217,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/tagController.js",
+    "filename": "./controllers/tagController.js",
     "groupTitle": "Games"
   },
   {
@@ -174,6 +226,22 @@
     "title": "Update a game",
     "name": "UpdateGame",
     "group": "Games",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "allowedValues": [
+              "\"Bearer :token\""
+            ],
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Replace <code>:token</code> with supplied JWT-token</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -230,7 +298,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/gamesController.js",
+    "filename": "./controllers/gamesController.js",
     "groupTitle": "Games"
   },
   {
@@ -256,7 +324,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": " HTTP  /1.1 200 OK\n {\n   \"g_id\": 2,\n   \"g_name\": \"Fun Game\",\n   \"g_welcometext\": \"Welcome!\",\n   \"g_completedtext\": \"Byebye :(\",\n\t  \"players\": 2,\n    \"tags\": 3\n }",
+          "content": "HTTP  /1.1 200 OK\n{\n  \"g_id\": 2,\n  \"g_name\": \"Fun Game\",\n  \"g_welcometext\": \"Welcome!\",\n  \"g_completedtext\": \"Byebye :(\",\n  \"players\": 2,\n  \"tags\": 3\n}",
           "type": "json"
         }
       ]
@@ -282,7 +350,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/gamesController.js",
+    "filename": "./controllers/gamesController.js",
     "groupTitle": "Games"
   },
   {
@@ -340,7 +408,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/playerController.js",
+    "filename": "./controllers/playerController.js",
     "groupTitle": "Players"
   },
   {
@@ -384,7 +452,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/playerController.js",
+    "filename": "./controllers/playerController.js",
     "groupTitle": "Players"
   },
   {
@@ -458,7 +526,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/tagController.js",
+    "filename": "./controllers/tagController.js",
     "groupTitle": "Tags"
   },
   {
@@ -502,7 +570,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/tagController.js",
+    "filename": "./controllers/tagController.js",
     "groupTitle": "Tags"
   },
   {
@@ -511,7 +579,7 @@
     "title": "Post found tag",
     "name": "PostTagsfound",
     "group": "Tags",
-    "description": "<p>Try to post found tag, gives either error 304 of ducplicate entry or marks the tags as found or if player won the game status 303 is given</p>",
+    "description": "<p>Try to post found tag, gives either error 304 of ducplicate entry or marks the tags as found. If player won the game status 303 is given</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -569,7 +637,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/tagController.js",
+    "filename": "./controllers/tagController.js",
     "groupTitle": "Tags"
   },
   {
@@ -628,7 +696,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/tagController.js",
+    "filename": "./controllers/tagController.js",
     "groupTitle": "Tags"
   },
   {
@@ -687,7 +755,111 @@
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/tagController.js",
+    "filename": "./controllers/tagController.js",
     "groupTitle": "Tags"
+  },
+  {
+    "type": "post",
+    "url": "/appslogin",
+    "title": "Log in user",
+    "name": "LoginUser",
+    "group": "Users",
+    "description": "<p>Log in user. JWT access token returned as callback</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Password</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP  /1.1 200 OK\n{\n  \"token\": \"xyz123\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500 Internal server error": [
+          {
+            "group": "500 Internal server error",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Problem fetching data.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./routes/loginRoutes.js",
+    "groupTitle": "Users"
+  },
+  {
+    "type": "post",
+    "url": "/appsignup",
+    "title": "Register user",
+    "name": "RegisterUser",
+    "group": "Users",
+    "description": "<p>Register user for creating, updating and deleting games. JWT access token returned as callback.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Password</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP  /1.1 200 OK\n{\n  \"token\": \"xyz123\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500 Internal server error": [
+          {
+            "group": "500 Internal server error",
+            "optional": false,
+            "field": "DatabaseError",
+            "description": "<p>Problem inserting data.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./routes/loginRoutes.js",
+    "groupTitle": "Users"
   }
 ]

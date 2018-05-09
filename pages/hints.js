@@ -67,11 +67,11 @@ export default class extends React.Component {
         </div>
         {!hints.status ?
           <Labelbox title="Found tags">
-            <ul>
+            <ul className="foundlist">
               {hints.map((hint) =>
                 <li key={hint.id}>
                   <h4>{hint.tag}</h4>
-                  {hint.hint}
+                  <p>{hint.hint}</p>
                 </li>
               )}
             </ul>

@@ -5,6 +5,8 @@ import Menu from './components/Menu';
 
 import "../scss/styles.scss"
 
+import Winner from './components/Winner';
+
 export default class extends React.Component {
   static async getInitialProps({ req, res }) {
     req.session.redirect = `tag/1`;
@@ -27,6 +29,9 @@ export default class extends React.Component {
           <p>NFC Hunt is a game about hunting treasures and clues utilizing NFC
           Tags. Simple to set up and players only need their mobile device to play.
           </p>
+          <h3>Credits</h3>
+          <p>Background: <a href='https://www.freepik.com/free-vector/purple-background-of-colorful-triangles_1095549.htm'>Freepik</a><br/>
+          Icons: <a href='https://flaticon.com'>Flaticon</a></p>
         </div>
         <Menu user={this.props.user} />
         <Footer />
