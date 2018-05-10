@@ -443,12 +443,7 @@ var _class = function (_React$Component) {
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'h4',
             null,
-            'Player1'
-          ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'span',
-            { className: 'span' },
-            'Tags found: 4'
+            this.state.user.p_name
           )
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_Menu__["default"], { user: this.props.user }),

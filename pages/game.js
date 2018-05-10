@@ -66,8 +66,7 @@ export default class extends React.Component {
         <Header/>
         <Game game={this.props.game}/>
         <Labelbox title="Player">
-          <h4>Player1</h4>
-          <span className="span">Tags found: 4</span>
+          <h4>{this.state.user.p_name}</h4>
         </Labelbox>
         <Menu user={this.props.user} />
         <Footer/>
