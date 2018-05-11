@@ -3,5 +3,5 @@
   "version": "0.1.0",
   "description": "NFC Hunt API documentation. Send request params as JSON in request body.",
   "title": "NFC Hunt Api",
-  "url" : "https://nfchunt.jelastic.metropolia.fi"
+  "url" : "https://iinar.net:8080"
 }
